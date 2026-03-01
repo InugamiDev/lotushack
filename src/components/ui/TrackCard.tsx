@@ -33,7 +33,7 @@ export function TrackCard({ track, index }: TrackCardProps) {
       </div>
 
       {/* Frame + content — preserves card-frame.png natural ratio */}
-      <div className="relative aspect-[1264/1187]">
+      <div className="relative aspect-[1264/1424]">
         <Image
           src="/assets/img/ui/card-frame.png"
           alt=""
@@ -44,7 +44,7 @@ export function TrackCard({ track, index }: TrackCardProps) {
         />
 
         {/* Text within cream interior */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden px-[16%] pt-[16%] pb-[14%] text-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden px-[10%] pt-[16%] pb-[10%] text-center">
           <h3 className="section-heading text-xl font-bold text-sienna-600 sm:text-2xl lg:text-3xl">
             {track.name}
           </h3>
