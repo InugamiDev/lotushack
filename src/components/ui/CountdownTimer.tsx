@@ -1,0 +1,66 @@
+"use client";
+
+import { useCountdown } from "@/hooks/useCountdown";
+import { EVENT_START } from "@/lib/constants";
+import { pad } from "@/lib/utils";
+
+type UnitProps = {
+  value: string;
+  label: string;
+};
+
+function Unit({ value, label }: UnitProps) {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <span className="min-w-[3.5rem] text-center font-mono text-4xl font-bold tabular-nums text-gold-400 sm:text-5xl md:text-6xl">
+        {value}
+      </span>
+      <span className="text-xs font-medium uppercase tracking-widest text-text-muted">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function Separator() {
+  return (
+    <span
+      className="self-start pt-2 font-mono text-3xl font-bold text-gold-400/40 sm:text-4xl md:text-5xl"
+      aria-hidden="true"
+    >
+      :
+    </span>
+  );
+}
+
+export function CountdownTimer() {
+  const { days, hours, minutes, seconds, mounted } = useCountdown(EVENT_START);
+
+  const placeholder = "--";
+
+  return (
+    <div role="timer" aria-live="polite" aria-label="Countdown to LotusHack">
+      <div className="flex items-start justify-center gap-3 sm:gap-4">
+        <Unit
+          value={mounted ? pad(days) : placeholder}
+          label="Days"
+        />
+        <Separator />
+        <Unit
+          value={mounted ? pad(hours) : placeholder}
+          label="Hours"
+        />
+        <Separator />
+        <Unit
+          value={mounted ? pad(minutes) : placeholder}
+          label="Min"
+        />
+        <Separator />
+        <Unit
+          value={mounted ? pad(seconds) : placeholder}
+          label="Sec"
+        />
+      </div>
+    </div>
+  );
+}
