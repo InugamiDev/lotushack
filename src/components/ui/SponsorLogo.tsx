@@ -20,10 +20,10 @@ const tierGrid: Record<string, string> = {
 
 /** Logo max-height per tier so higher tiers render bigger */
 const tierLogoSize: Record<string, string> = {
-  hero: "max-h-16 max-w-[80%]",
+  hero: "max-h-48 max-w-[85%]",
   gold: "max-h-12 max-w-[75%]",
-  silver: "max-h-10 max-w-[70%]",
-  bronze: "max-h-10 max-w-[70%]",
+  silver: "max-h-16 max-w-[70%]",
+  bronze: "max-h-24 max-w-[70%]",
 };
 
 export function SponsorLogo({ sponsor }: SponsorLogoProps) {
