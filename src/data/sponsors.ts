@@ -61,11 +61,11 @@ export const sponsors: Sponsor[] = [
   },
   {
     name: "OpenRouter",
-    logo: "/assets/svg/sponsors/openrouter.svg",
-    lightLogo: "/assets/svg/sponsors/openrouter-white.svg",
+    logo: "/assets/img/sponsors/openrouter.png",
+    lightLogo: "/assets/img/sponsors/openrouter.png",
     url: "https://openrouter.ai",
-    width: 1200,
-    height: 400,
+    width: 2400,
+    height: 800,
     tier: "gold",
     description:
       "Unified API gateway for the best AI models — find, compare, and use any LLM through a single interface.",
@@ -164,8 +164,8 @@ export const sponsors: Sponsor[] = [
     logo: "/assets/img/sponsors/veracia.png",
     lightLogo: "/assets/img/sponsors/veracia-white.png",
     url: "https://veracia.ai",
-    width: 500,
-    height: 500,
+    width: 1000,
+    height: 1000,
     tier: "bronze",
   },
 
@@ -184,8 +184,8 @@ export const sponsors: Sponsor[] = [
     logo: "/assets/img/sponsors/greennode.jpg",
     lightLogo: "/assets/img/sponsors/greennode-white.png",
     url: "https://greennode.ai",
-    width: 1000,
-    height: 1000,
+    width: 2000,
+    height: 2000,
     tier: "community",
   },
   {
