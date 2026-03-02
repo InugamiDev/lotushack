@@ -121,7 +121,7 @@ export function HeroSection() {
           style={{ textWrap: "balance" }}
         >
           Let&apos;s build the biggest hackathon in Vietnam — and beyond.
-          Join 800+ builders in shaping a defining moment for SE Asia&apos;s
+          Join 600+ builders in shaping a defining moment for SE Asia&apos;s
           builder community.
         </p>
 

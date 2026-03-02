@@ -17,17 +17,17 @@ export const NAV_LINKS = [
 export const SOCIALS = [
   {
     label: "Instagram",
-    href: "https://instagram.com/lotushack",
+    href: "https://www.instagram.com/lotushacks/",
     icon: "instagram" as const,
   },
   {
     label: "Facebook",
-    href: "https://facebook.com/lotushack",
+    href: "https://www.facebook.com/lotushacksvietnam",
     icon: "facebook" as const,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/lotushack",
+    href: "https://www.linkedin.com/company/lotushacks/",
     icon: "linkedin" as const,
   },
   {
@@ -37,4 +37,5 @@ export const SOCIALS = [
   },
 ] as const;
 
-export const REGISTER_URL = "https://lotushack.org/register";
+export const REGISTER_URL = "https://luma.com/j9c5fvmq";
+export const DISCORD_URL = "https://discord.gg/3xCP2QkCrp";
