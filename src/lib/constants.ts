@@ -9,7 +9,6 @@ export const EVENT_LOCATION = "VNG Campus, Ho Chi Minh City, Vietnam";
 export const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Tracks", href: "#tracks" },
-  { label: "Schedule", href: "#schedule" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "FAQ", href: "#faq" },
 ] as const;
@@ -34,6 +33,11 @@ export const SOCIALS = [
     label: "Email",
     href: "mailto:hello@lotushack.org",
     icon: "email" as const,
+  },
+  {
+    label: "Discord",
+    href: "https://discord.gg/3xCP2QkCrp",
+    icon: "discord" as const,
   },
 ] as const;
 

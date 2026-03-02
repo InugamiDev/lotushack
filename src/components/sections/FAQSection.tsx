@@ -1,10 +1,11 @@
 import { SectionReveal } from "@/components/ui/SectionReveal";
+import { StaggerReveal } from "@/components/ui/StaggerReveal";
 import { AccordionItem } from "@/components/ui/AccordionItem";
 import { faqItems } from "@/data/faq";
 
 export function FAQSection() {
   return (
-    <section id="faq" className="bg-forest-900/80 py-16 backdrop-blur-sm sm:py-24">
+    <section id="faq" className="py-24 sm:py-36">
       <div className="mx-auto max-w-3xl px-6">
         <SectionReveal>
           <div className="text-center">
@@ -14,6 +15,7 @@ export function FAQSection() {
             >
               Frequently Asked Questions
             </h2>
+            <div className="mx-auto mt-3 h-px w-16 shimmer-gold" />
             <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
               Got questions? We&apos;ve got answers. If you don&apos;t find what
               you&apos;re looking for, reach out to us at{" "}
@@ -28,13 +30,15 @@ export function FAQSection() {
           </div>
         </SectionReveal>
 
-        <SectionReveal delay={0.15}>
-          <div className="mt-12 divide-y divide-border-subtle border-t border-border-subtle">
-            {faqItems.map((item) => (
-              <AccordionItem key={item.question} item={item} />
-            ))}
-          </div>
-        </SectionReveal>
+        <StaggerReveal
+          variant="slide-up"
+          staggerDelay={0.1}
+          className="mt-12 divide-y divide-gold-400/15 border-t border-gold-400/15"
+        >
+          {faqItems.map((item) => (
+            <AccordionItem key={item.question} item={item} />
+          ))}
+        </StaggerReveal>
       </div>
     </section>
   );

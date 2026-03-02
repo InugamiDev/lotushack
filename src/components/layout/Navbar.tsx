@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, REGISTER_URL } from "@/lib/constants";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -16,16 +18,55 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Active section tracking via IntersectionObserver
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map((link) => link.href.slice(1));
+    const observers: IntersectionObserver[] = [];
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { rootMargin: "-50% 0px -50% 0px" },
+      );
+      observer.observe(el);
+      observers.push(observer);
+    }
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  // Body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-forest-950/90 backdrop-blur-lg border-b border-border-subtle"
-          : "bg-transparent"
+          ? "bg-forest-950/90 backdrop-blur-lg border-b border-gold-400/15 shadow-[0_1px_15px_oklch(0.78_0.16_75/0.05)]"
+          : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-all duration-300",
+          scrolled ? "py-2" : "py-4",
+        )}
+      >
         {/* Logo */}
         <a
           href="#"
@@ -37,12 +78,12 @@ export function Navbar() {
             alt=""
             width={36}
             height={36}
-            className="h-auto w-auto"
+            className={cn(
+              "h-auto w-auto transition-transform duration-300",
+              scrolled ? "scale-90" : "scale-100",
+            )}
             aria-hidden="true"
           />
-          <span className="text-lg font-semibold text-text-primary">
-            LotusHack
-          </span>
         </a>
 
         {/* Desktop Links */}
@@ -51,7 +92,12 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm"
+                className={cn(
+                  "text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm",
+                  activeSection === link.href.slice(1)
+                    ? "text-gold-400"
+                    : "text-text-secondary hover:text-gold-400",
+                )}
               >
                 {link.label}
               </a>
@@ -62,9 +108,10 @@ export function Navbar() {
         {/* Desktop CTA */}
         <a
           href={REGISTER_URL}
-          className="hidden min-h-[2.625rem] items-center rounded-lg bg-gold-400 px-6 py-3 text-base font-semibold text-forest-950 transition-colors duration-200 hover:bg-gold-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 touch-action-manipulation md:inline-flex"
+          className="btn-register hidden min-h-[2.625rem] items-center px-6 py-3 text-base font-semibold text-gold-400 hover:text-cream-50 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 touch-action-manipulation md:inline-flex"
         >
-          Register
+          <span className="brush-bg" aria-hidden="true" />
+          <span className="relative">Register</span>
         </a>
 
         {/* Mobile Hamburger */}
@@ -104,29 +151,43 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu Panel */}
-      {menuOpen ? (
-        <div className="border-t border-border-subtle bg-forest-950/95 backdrop-blur-lg md:hidden">
-          <div className="flex flex-col gap-2 px-6 py-6">
-            {NAV_LINKS.map((link) => (
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden border-t border-border-subtle bg-forest-950/95 backdrop-blur-lg motion-reduce:transition-none md:hidden"
+          >
+            <div className="flex flex-col gap-2 px-6 py-6">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={cn(
+                    "rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200 hover:bg-forest-800 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950",
+                    activeSection === link.href.slice(1)
+                      ? "text-gold-400 bg-forest-800/50"
+                      : "text-text-secondary",
+                  )}
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
+                href={REGISTER_URL}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-4 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-forest-800 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950"
+                className="btn-register mt-2 inline-flex min-h-[2.625rem] items-center justify-center px-6 py-3 text-base font-semibold text-gold-400 hover:text-cream-50 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 touch-action-manipulation"
               >
-                {link.label}
+                <span className="brush-bg" aria-hidden="true" />
+                <span className="relative">Register Now</span>
               </a>
-            ))}
-            <a
-              href={REGISTER_URL}
-              onClick={() => setMenuOpen(false)}
-              className="mt-2 inline-flex min-h-[2.625rem] items-center justify-center rounded-lg bg-gold-400 px-6 py-3 text-base font-semibold text-forest-950 transition-colors duration-200 hover:bg-gold-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 touch-action-manipulation"
-            >
-              Register Now
-            </a>
-          </div>
-        </div>
-      ) : null}
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </nav>
   );
 }

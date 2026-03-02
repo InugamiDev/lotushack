@@ -14,6 +14,7 @@ export function TimelineSection() {
             >
               Schedule
             </h2>
+            <div className="mx-auto mt-3 h-px w-16 shimmer-gold" />
             <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
               36 hours of hacking, workshops, meals, and fun. Here&apos;s what
               to expect.
@@ -26,7 +27,7 @@ export function TimelineSection() {
           <div className="mt-12 hidden gap-6 lg:grid lg:grid-cols-3">
             {schedule.map((day) => (
               <div key={day.label}>
-                <div className="mb-4 rounded-lg bg-surface-elevated px-4 py-3">
+                <div className="mb-4 rounded-lg border border-gold-400/[0.12] bg-surface-elevated px-4 py-3">
                   <h3 className="text-sm font-semibold text-gold-400">
                     {day.label}
                   </h3>
@@ -47,7 +48,7 @@ export function TimelineSection() {
           {schedule.map((day, dayIndex) => (
             <SectionReveal key={day.label} delay={dayIndex * 0.1}>
               <div>
-                <div className="mb-4 rounded-lg bg-surface-elevated px-4 py-3">
+                <div className="mb-4 rounded-lg border border-gold-400/[0.12] bg-surface-elevated px-4 py-3">
                   <h3 className="text-sm font-semibold text-gold-400">
                     {day.label}
                   </h3>

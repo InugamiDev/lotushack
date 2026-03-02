@@ -12,7 +12,10 @@ type UnitProps = {
 function Unit({ value, label }: UnitProps) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="min-w-[3.5rem] text-center font-mono text-4xl font-bold tabular-nums text-gold-400 sm:text-5xl md:text-6xl">
+      <span
+        className="min-w-[3.5rem] text-center font-mono text-4xl font-bold tabular-nums text-gold-400 sm:text-5xl md:text-6xl"
+        style={{ textShadow: "0 0 20px oklch(0.78 0.16 75 / 0.4)" }}
+      >
         {value}
       </span>
       <span className="text-xs font-medium uppercase tracking-widest text-text-muted">

@@ -20,8 +20,8 @@ const colorMap = {
     center: "fill-lotus-500",
   },
   gold: {
-    outer: "fill-gold-400/60",
-    inner: "fill-gold-300/40",
+    outer: "fill-gold-400/70",
+    inner: "fill-gold-300/50",
     center: "fill-gold-500",
   },
   muted: {

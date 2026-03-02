@@ -56,7 +56,7 @@ function CloudWisp({ index }: { index: number }) {
     >
       <path
         d={buildCloudPath(index)}
-        className="fill-cream-100"
+        className="fill-forest-950"
       />
     </svg>
   );

@@ -1,13 +1,4 @@
-import { Clock, Brain, MapPin, Trophy, Users } from "lucide-react";
 import type { Stat } from "@/data/stats";
-
-const iconMap = {
-  clock: Clock,
-  brain: Brain,
-  "map-pin": MapPin,
-  trophy: Trophy,
-  users: Users,
-} as const;
 
 /** Cycle through different float directions per card */
 const floatVariants = [
@@ -24,7 +15,6 @@ type StatCardProps = {
 };
 
 export function StatCard({ stat, index }: StatCardProps) {
-  const Icon = iconMap[stat.icon];
   const floatClass = floatVariants[index % floatVariants.length];
   const delay = `${index * 0.5}s`;
 
@@ -40,12 +30,11 @@ export function StatCard({ stat, index }: StatCardProps) {
           aria-hidden="true"
         />
         {/* Content inside cream interior */}
-        <div className="relative flex h-full flex-col items-center justify-center px-[14%] pt-[14%] pb-[18%] text-center">
-          <Icon className="h-7 w-7 text-gold-500 sm:h-9 sm:w-9" strokeWidth={1.5} />
-          <p className="mt-2 text-base font-bold text-sienna-600 sm:text-lg">
+        <div className="relative flex h-full flex-col items-center justify-center px-[18.2%] pt-[18%] pb-[18%] text-center">
+          <p className="text-base font-bold text-sienna-600 sm:text-lg">
             {stat.title}
           </p>
-          <p className="mt-1 text-[0.65rem] leading-snug text-forest-950/60 sm:text-xs">
+          <p className="mt-1.5 text-[0.65rem] leading-snug text-forest-950/60 sm:text-xs">
             {stat.description}
           </p>
         </div>

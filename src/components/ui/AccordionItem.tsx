@@ -12,7 +12,7 @@ export function AccordionItem({ item }: AccordionItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-border-subtle">
+    <div className="border-b border-gold-400/15">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -32,7 +32,7 @@ export function AccordionItem({ item }: AccordionItemProps) {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className={`h-5 w-5 shrink-0 text-text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-5 w-5 shrink-0 text-gold-400/40 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -44,7 +44,10 @@ export function AccordionItem({ item }: AccordionItemProps) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{
+              height: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
             className="overflow-hidden"
           >
             <p className="pb-6 text-sm leading-relaxed text-text-secondary">

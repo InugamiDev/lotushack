@@ -18,19 +18,14 @@ export function TrackCard({ track, index }: TrackCardProps) {
 
   return (
     <div
-      className={`group relative pt-12 sm:pt-14 ${floatClass}`}
+      className={`group relative transition-transform duration-300 hover:-translate-y-2 motion-reduce:transition-none ${floatClass}`}
       style={{ animationDelay: `${index * 0.4}s` }}
     >
-      {/* Track icon — floats above the frame, centered */}
-      <div className="absolute left-1/2 top-0 z-10 h-20 w-20 -translate-x-1/2 sm:h-24 sm:w-24">
-        <Image
-          src={track.image}
-          alt=""
-          fill
-          className="object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-110"
-          sizes="96px"
-        />
-      </div>
+      {/* Hover glow */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl bg-gold-400/0 blur-2xl transition-all duration-300 group-hover:bg-gold-400/10 motion-reduce:transition-none"
+        aria-hidden="true"
+      />
 
       {/* Frame + content — preserves card-frame.png natural ratio */}
       <div className="relative aspect-[1264/1424]">
@@ -44,7 +39,7 @@ export function TrackCard({ track, index }: TrackCardProps) {
         />
 
         {/* Text within cream interior */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden px-[10%] pt-[16%] pb-[10%] text-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden px-[15.6%] pt-[16%] pb-[10%] text-center">
           <h3 className="section-heading text-xl font-bold text-sienna-600 sm:text-2xl lg:text-3xl">
             {track.name}
           </h3>
