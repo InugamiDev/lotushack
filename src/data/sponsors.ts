@@ -65,7 +65,7 @@ export const sponsors: Sponsor[] = [
     lightLogo: "/assets/img/sponsors/openrouter.png",
     url: "https://openrouter.ai",
     width: 2400,
-    height: 800,
+    height: 800sd,
     tier: "gold",
     description:
       "Unified API gateway for the best AI models — find, compare, and use any LLM through a single interface.",
