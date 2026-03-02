@@ -16,6 +16,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "eTest",
     logo: "/assets/img/sponsors/etest.png",
+    lightLogo: "/assets/img/sponsors/etest-white.png",
     url: "https://etest.edu.vn",
     width: 6879,
     height: 1823,
@@ -37,6 +38,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "VNG Corporation",
     logo: "/assets/img/sponsors/vng.png",
+    lightLogo: "/assets/img/sponsors/vng-white.png",
     url: "https://vng.com.vn",
     width: 1040,
     height: 570,
@@ -49,7 +51,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Trae",
     logo: "/assets/img/sponsors/trae-light.png",
-    lightLogo: "/assets/img/sponsors/trae-dark.png",
+    lightLogo: "/assets/img/sponsors/trae-white.png",
     url: "https://trae.ai",
     width: 1755,
     height: 1241,
@@ -60,6 +62,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "OpenRouter",
     logo: "/assets/svg/sponsors/openrouter.svg",
+    lightLogo: "/assets/svg/sponsors/openrouter-white.svg",
     url: "https://openrouter.ai",
     width: 1200,
     height: 400,
@@ -81,7 +84,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "n8n",
     logo: "/assets/img/sponsors/n8n-light.png",
-    lightLogo: "/assets/img/sponsors/n8n-dark.png",
+    lightLogo: "/assets/img/sponsors/n8n-white.png",
     url: "https://n8n.io",
     width: 576,
     height: 160,
@@ -141,6 +144,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Redis",
     logo: "/assets/img/sponsors/redis.jpg",
+    lightLogo: "/assets/img/sponsors/redis-white.png",
     url: "https://redis.io",
     width: 2091,
     height: 658,
@@ -149,6 +153,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "JigsawStack",
     logo: "/assets/svg/sponsors/jigsawstack.svg",
+    lightLogo: "/assets/svg/sponsors/jigsawstack-white.svg",
     url: "https://jigsawstack.com",
     width: 731,
     height: 110,
@@ -157,6 +162,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Veracia",
     logo: "/assets/img/sponsors/veracia.png",
+    lightLogo: "/assets/img/sponsors/veracia-white.png",
     url: "https://veracia.ai",
     width: 500,
     height: 500,
@@ -167,6 +173,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "CoderSchool",
     logo: "/assets/img/sponsors/coderschool.png",
+    lightLogo: "/assets/img/sponsors/coderschool-white.png",
     url: "https://coderschool.vn",
     width: 2000,
     height: 1551,
@@ -175,6 +182,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "GreenNode",
     logo: "/assets/img/sponsors/greennode.jpg",
+    lightLogo: "/assets/img/sponsors/greennode-white.png",
     url: "https://greennode.ai",
     width: 1000,
     height: 1000,
@@ -207,6 +215,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "FreightPilot.AI",
     logo: "/assets/img/sponsors/freightpilot.png",
+    lightLogo: "/assets/img/sponsors/freightpilot-white.png",
     url: "https://freightpilot.ai",
     width: 300,
     height: 100,
