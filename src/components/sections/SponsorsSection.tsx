@@ -20,7 +20,7 @@ export function SponsorsSection() {
         </SectionReveal>
 
         <SectionReveal delay={0.15}>
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="mt-12 grid grid-cols-12 gap-4">
             {sponsors.map((sponsor) => (
               <SponsorLogo key={sponsor.name} sponsor={sponsor} />
             ))}

@@ -10,20 +10,22 @@ type SponsorLogoProps = {
   sponsor: Sponsor;
 };
 
-/** Grid span per tier */
+/** Grid span in a 12-column grid: hero=4(3/row), gold/silver/bronze=3(4/row), community=2(6/row) */
 const tierGrid: Record<string, string> = {
-  hero: "col-span-2 row-span-2",
-  gold: "col-span-2",
-  silver: "",
-  bronze: "",
+  hero: "col-span-6 sm:col-span-4",
+  gold: "col-span-6 sm:col-span-3",
+  silver: "col-span-6 sm:col-span-3",
+  bronze: "col-span-6 sm:col-span-3",
+  community: "col-span-4 sm:col-span-2",
 };
 
-/** Logo max-height per tier so higher tiers render bigger */
+/** Logo max-height per tier */
 const tierLogoSize: Record<string, string> = {
-  hero: "max-h-48 max-w-[85%]",
-  gold: "max-h-12 max-w-[75%]",
-  silver: "max-h-16 max-w-[70%]",
-  bronze: "max-h-24 max-w-[70%]",
+  hero: "max-h-20 max-w-[85%]",
+  gold: "max-h-14 max-w-[75%]",
+  silver: "max-h-14 max-w-[75%]",
+  bronze: "max-h-12 max-w-[70%]",
+  community: "max-h-10 max-w-[70%]",
 };
 
 export function SponsorLogo({ sponsor }: SponsorLogoProps) {
