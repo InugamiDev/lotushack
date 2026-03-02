@@ -53,8 +53,8 @@ export const sponsors: Sponsor[] = [
     logo: "/assets/img/sponsors/trae-light.png",
     lightLogo: "/assets/img/sponsors/trae-white.png",
     url: "https://trae.ai",
-    width: 1755,
-    height: 1241,
+    width: 3510,
+    height: 2482,
     tier: "gold",
     description:
       "AI-powered coding assistant helping developers build faster with intelligent code generation and debugging.",
@@ -73,7 +73,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Agora",
     logo: "/assets/img/sponsors/agora-blue.png",
-    lightLogo: "/assets/img/sponsors/agora-white.png",
+    lightLogo: "/assets/img/sponsors/agora-blue.png",
     url: "https://agora.io",
     width: 600,
     height: 600,
@@ -97,7 +97,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "HRG",
     logo: "/assets/svg/sponsors/hrg-dark.svg",
-    lightLogo: "/assets/svg/sponsors/hrg-light.svg",
+    lightLogo: "/assets/svg/sponsors/hrg-dark.svg",
     url: "https://hackerresidencygroup.com",
     width: 2078,
     height: 600,
@@ -117,7 +117,7 @@ export const sponsors: Sponsor[] = [
     logo: "/assets/img/sponsors/algorithmics-dark.png",
     lightLogo: "/assets/img/sponsors/algorithmics-light.png",
     url: "https://algo.edu.vn",
-    width: 2160,
+    width: 4320,
     height: 2160,
     tier: "silver",
   },
