@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "LotusHacks 2026 — Vietnam's Largest Hackathon",
     short_name: "LotusHacks",
     description:
-      "Join 600+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22, Ho Chi Minh City.",
+      "Join 800+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22, Ho Chi Minh City.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a1f1a",

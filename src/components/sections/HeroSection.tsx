@@ -165,7 +165,7 @@ export function HeroSection() {
           className="max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl"
           style={{ textWrap: "balance" }}
         >
-          Join 600+{" "}
+          Join 800+{" "}
           <RotatingWords
             words={HERO_WORDS}
             className="text-gold-400 font-semibold"

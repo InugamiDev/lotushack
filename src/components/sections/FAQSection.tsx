@@ -20,10 +20,10 @@ export function FAQSection() {
               Got questions? We&apos;ve got answers. If you don&apos;t find what
               you&apos;re looking for, reach out to us at{" "}
               <a
-                href="mailto:hello@lotushack.org"
+                href="mailto:team@lotushack.org"
                 className="text-gold-400 underline underline-offset-4 transition-colors duration-200 hover:text-gold-300"
               >
-                hello@lotushack.org
+                team@lotushack.org
               </a>
               .
             </p>

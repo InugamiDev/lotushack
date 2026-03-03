@@ -31,7 +31,7 @@ export const SOCIALS = [
   },
   {
     label: "Email",
-    href: "mailto:hello@lotushack.org",
+    href: "mailto:team@lotushack.org",
     icon: "email" as const,
   },
   {

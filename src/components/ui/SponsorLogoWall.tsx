@@ -56,13 +56,27 @@ const communitySponsors = new Set([
 
 /** Row-based sizing — each visual row gets a consistent height */
 const ROW_HEIGHTS = [
-  "max-h-16 sm:max-h-24 md:max-h-28",   // Row 1: Hero — biggest
-  "max-h-10 sm:max-h-16 md:max-h-20",    // Row 2: Gold
-  "max-h-10 sm:max-h-16 md:max-h-20",    // Row 3: Gold + Bronze (same as row 2)
+  "max-h-16 sm:max-h-24 md:max-h-28",      // Row 1: Hero — biggest
+  "max-h-10 sm:max-h-16 md:max-h-20",      // Row 2: Gold
+  "max-h-10 sm:max-h-16 md:max-h-20",      // Row 3: Gold + Bronze
   "max-h-8 sm:max-h-14 md:max-h-[4.5rem]", // Row 4: Silver
-  "max-h-7 sm:max-h-11 md:max-h-14",     // Row 5: Silver + Community
-  "max-h-8 sm:max-h-12 md:max-h-14",     // Row 6: Community
+  "max-h-9 sm:max-h-14 md:max-h-18",       // Row 5: Silver + Community (bigger)
+  "max-h-9 sm:max-h-14 md:max-h-16",       // Row 6: Community (bigger)
 ] as const;
+
+/** Per-sponsor size overrides */
+const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
+  Agora: "max-h-12 sm:max-h-18 md:max-h-22",          // Row 2: bigger
+  Exa: "max-h-6 sm:max-h-10 md:max-h-12",             // Row 4: smaller
+  Algorithmics: "max-h-12 sm:max-h-18 md:max-h-22",   // Row 5: bigger
+};
+
+/** Per-sponsor positional nudges */
+const SPONSOR_NUDGES: Record<string, string> = {
+  Agora: "translate-y-1 sm:translate-y-1.5",                   // down a bit to align row 2
+  OpenAI: "-translate-x-2 md:-translate-x-4",                  // closer to VNG
+  ElevenLabs: "-translate-x-4 md:-translate-x-8",              // to the left
+};
 
 /** Map each sponsor name → its visual row index */
 const sponsorRowMap = new Map<string, number>();
@@ -89,7 +103,8 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
   const isSvg = logoSrc.endsWith(".svg");
 
   const row = sponsorRowMap.get(sponsor.name) ?? 4;
-  const heightClass = ROW_HEIGHTS[row];
+  const heightClass = SPONSOR_SIZE_OVERRIDES[sponsor.name] ?? ROW_HEIGHTS[row];
+  const nudge = SPONSOR_NUDGES[sponsor.name];
 
   return (
     <a
@@ -105,6 +120,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
         row === 3 && "-translate-x-5 md:-translate-x-10",
         row === 4 && "-translate-x-3 md:-translate-x-6",
         row === 5 && "-translate-x-3 md:-translate-x-6",
+        nudge,
       )}
     >
       <Image

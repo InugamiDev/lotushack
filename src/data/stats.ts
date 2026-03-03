@@ -35,10 +35,10 @@ export const stats: Stat[] = [
     icon: "trophy",
   },
   {
-    title: "600+ Hackers",
-    highlight: "From Across Vietnam",
+    title: "800+ Hackers",
+    highlight: "From Across the World",
     description:
-      "Builders, designers, and dreamers — from first-time hackers to seasoned engineers, all under one roof.",
+      "5 continents, 30+ countries — builders, designers, and dreamers from around the globe, all under one roof.",
     icon: "users",
   },
 ];

@@ -57,7 +57,7 @@ function AboutSignPanel() {
 
         <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary">
           The largest 36-hour hackathon in Vietnam. We&rsquo;re bringing
-          together 600 builders, creators, and hackers to Ho Chi Minh City to
+          together 800+ builders, creators, and hackers to Ho Chi Minh City to
           build bold ideas. Over one weekend, collaborate, learn from top
           mentors, and connect with engineers and founders from leading tech
           companies.

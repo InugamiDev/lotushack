@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
   description:
-    "Join 600+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City. Over 250M+ VND in prizes.",
+    "Join 800+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City. Over 250M+ VND in prizes.",
   metadataBase: new URL("https://lotushack.org"),
   keywords: [
     "hackathon",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
     description:
-      "Join 600+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City.",
+      "Join 800+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City.",
     url: "https://lotushack.org",
     siteName: "LotusHacks",
     locale: "en_US",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
     description:
-      "Join 600+ builders for a 36-hour hackathon. March 20-22 at VNG Campus, Ho Chi Minh City.",
+      "Join 800+ builders for a 36-hour hackathon. March 20-22 at VNG Campus, Ho Chi Minh City.",
     images: ["/assets/img/branding/lotushacks-color-logo.png"],
   },
   icons: {
@@ -95,7 +95,7 @@ function JsonLd() {
     "@type": "Event",
     name: "LotusHacks x HackHarvard Vietnam 2026",
     description:
-      "A 36-hour, in-person hackathon bringing together 600+ builders, creators, and hackers to Ho Chi Minh City. Over 250M+ VND in prizes across 4 tracks.",
+      "A 36-hour, in-person hackathon bringing together 800+ builders, creators, and hackers to Ho Chi Minh City. Over 250M+ VND in prizes across 4 tracks.",
     startDate: "2026-03-20T20:00:00+07:00",
     endDate: "2026-03-22T08:00:00+07:00",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
