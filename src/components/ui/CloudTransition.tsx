@@ -3,8 +3,8 @@
 import { useCallback, useRef } from "react";
 import { motion } from "motion/react";
 
-const SEGMENT_COUNT = 300;
-const STAGGER = 0.003;
+const SEGMENT_COUNT = 400;
+const STAGGER = 0.002;
 
 type CloudTransitionProps = {
   onComplete: () => void;
@@ -27,14 +27,14 @@ function buildCloudPath(index: number): string {
   let top = `M0 ${(s * 3) % 12}`;
   for (let i = 1; i <= steps; i++) {
     const cpx = dx * i - dx / 2;
-    const cpy = ((s * i * 7 + i * 11) % 18);
+    const cpy = (s * i * 7 + i * 11) % 18;
     const x = dx * i;
-    const y = ((s * i * 11 + i * 5) % 14);
+    const y = (s * i * 11 + i * 5) % 14;
     top += ` Q${cpx} ${cpy},${x} ${y}`;
   }
 
   // Wavy bottom edge (right-to-left): oscillates between y=H and y=~H-18
-  let bottom = ` L${W} ${H - (s * 2) % 12}`;
+  let bottom = ` L${W} ${H - ((s * 2) % 12)}`;
   for (let i = steps - 1; i >= 0; i--) {
     const cpx = dx * i + dx / 2;
     const cpy = H - ((s * i * 5 + i * 7) % 18);
@@ -46,61 +46,15 @@ function buildCloudPath(index: number): string {
   return `${top}${bottom} Z`;
 }
 
-/**
- * Maps a segment index (0..SEGMENT_COUNT-1) to a gradient stop color.
- * Creates a flowing wave: forest-950 → jade-600 → gold-400 → jade-600 → forest-950
- */
-function segmentColor(index: number): string {
-  const t = index / (SEGMENT_COUNT - 1); // 0 → 1
-
-  // Two-cycle sine wave so the gradient "breathes" across the segments
-  const wave = Math.sin(t * Math.PI * 2.5);
-
-  // Interpolate lightness & chroma based on wave position
-  // forest-950: L=0.12 C=0.03 H=155
-  // jade-600:   L=0.50 C=0.14 H=155
-  // gold-400:   L=0.78 C=0.16 H=75
-  if (wave > 0) {
-    // forest → jade
-    const p = wave;
-    const l = 0.12 + p * 0.22; // 0.12 → 0.34
-    const c = 0.03 + p * 0.08; // 0.03 → 0.11
-    return `oklch(${l} ${c} 155)`;
-  } else {
-    // forest → gold (subtle warm accent)
-    const p = -wave;
-    const l = 0.12 + p * 0.18; // 0.12 → 0.30
-    const c = 0.03 + p * 0.06; // 0.03 → 0.09
-    const h = 155 - p * 60;    // 155 → 95 (toward gold hue)
-    return `oklch(${l} ${c} ${h})`;
-  }
+/** Inline SVG data URI for use as CSS mask */
+function buildMaskUri(index: number): string {
+  const path = buildCloudPath(index);
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 100' preserveAspectRatio='none'><path d='${path}' fill='white'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
-function CloudWisp({ index }: { index: number }) {
-  const gradId = `wave-grad-${index}`;
-  const color = segmentColor(index);
-  const nextColor = segmentColor(Math.min(index + 1, SEGMENT_COUNT - 1));
-
-  return (
-    <svg
-      viewBox="0 0 1600 100"
-      preserveAspectRatio="none"
-      className="absolute inset-0 h-full w-full"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor={color} />
-          <stop offset="100%" stopColor={nextColor} />
-        </linearGradient>
-      </defs>
-      <path
-        d={buildCloudPath(index)}
-        fill={`url(#${gradId})`}
-      />
-    </svg>
-  );
-}
+const GRADIENT =
+  "linear-gradient(to bottom, oklch(0.12 0.03 155), oklch(0 0 0))";
 
 export function CloudTransition({ onComplete }: CloudTransitionProps) {
   const completedRef = useRef(false);
@@ -138,7 +92,18 @@ export function CloudTransition({ onComplete }: CloudTransitionProps) {
         <motion.div
           key={seg.index}
           className="absolute left-0 w-screen"
-          style={{ top: seg.top, height: seg.height }}
+          style={{
+            top: seg.top,
+            height: seg.height,
+            background: GRADIENT,
+            backgroundAttachment: "fixed",
+            WebkitMaskImage: buildMaskUri(seg.index),
+            WebkitMaskSize: "100% 100%",
+            WebkitMaskRepeat: "no-repeat",
+            maskImage: buildMaskUri(seg.index),
+            maskSize: "100% 100%",
+            maskRepeat: "no-repeat",
+          }}
           initial={{ x: 0 }}
           animate={{ x: seg.x }}
           transition={{
@@ -149,9 +114,7 @@ export function CloudTransition({ onComplete }: CloudTransitionProps) {
           onAnimationComplete={
             seg.index === lastIndex ? handleComplete : undefined
           }
-        >
-          <CloudWisp index={seg.index} />
-        </motion.div>
+        />
       ))}
     </div>
   );
