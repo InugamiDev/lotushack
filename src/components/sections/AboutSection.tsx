@@ -74,7 +74,7 @@ function AboutSignPanel() {
   );
 }
 
-/** Single scroll-driven card — slides up into view, holds, then slides out as next arrives */
+/** Single scroll-driven card — enters from bottom, travels up and exits out the top */
 function ScrollCard({
   index,
   scrollYProgress,
@@ -86,44 +86,36 @@ function ScrollCard({
   const total = stats.length;
   const isLast = index === total - 1;
 
-  // Each card gets an equal segment of the 0.05–0.95 range
+  // Each card occupies a segment of the scroll range
   const segSize = 0.9 / total;
-  const enterStart = 0.05 + index * segSize;
-  const enterEnd = enterStart + segSize * 0.35; // first 35% of segment: slide in
-  const exitStart = enterStart + segSize * 0.65; // last 35%: slide out
-  const exitEnd = enterStart + segSize;
+  const start = 0.05 + index * segSize;
+  const center = start + segSize * 0.5;
+  const end = start + segSize;
 
-  // Enter: slide up from below
-  const yIn = useTransform(scrollYProgress, [enterStart, enterEnd], [80, 0]);
-  const opIn = useTransform(scrollYProgress, [enterStart, enterEnd], [0, 1]);
-  const scIn = useTransform(scrollYProgress, [enterStart, enterEnd], [0.92, 1]);
-
-  // Exit: slide up and out (last card stays)
-  const yOut = useTransform(scrollYProgress, [exitStart, exitEnd], [0, -80]);
-  const opOut = useTransform(scrollYProgress, [exitStart, exitEnd], [1, 0]);
-  const scOut = useTransform(scrollYProgress, [exitStart, exitEnd], [1, 0.92]);
-
-  // Combine enter + exit: enter drives in, exit drives out
-  const y = useTransform(() =>
-    isLast
-      ? yIn.get()
-      : scrollYProgress.get() < exitStart
-        ? yIn.get()
-        : yOut.get(),
+  // Continuous upward travel: bottom (300px) → center (0) → top (-300px)
+  // Last card stops at center
+  const y = useTransform(
+    scrollYProgress,
+    isLast ? [start, center] : [start, center, end],
+    isLast ? [300, 0] : [300, 0, -300],
   );
-  const opacity = useTransform(() =>
+
+  // Opacity: fade in on enter, fade out on exit (last card stays)
+  const opacity = useTransform(
+    scrollYProgress,
     isLast
-      ? opIn.get()
-      : scrollYProgress.get() < exitStart
-        ? opIn.get()
-        : opOut.get(),
+      ? [start, start + segSize * 0.3]
+      : [start, start + segSize * 0.3, end - segSize * 0.3, end],
+    isLast ? [0, 1] : [0, 1, 1, 0],
   );
-  const scale = useTransform(() =>
+
+  // Scale: grow in, shrink out (last card stays full)
+  const scale = useTransform(
+    scrollYProgress,
     isLast
-      ? scIn.get()
-      : scrollYProgress.get() < exitStart
-        ? scIn.get()
-        : scOut.get(),
+      ? [start, start + segSize * 0.3]
+      : [start, start + segSize * 0.3, end - segSize * 0.3, end],
+    isLast ? [0.85, 1] : [0.85, 1, 1, 0.85],
   );
 
   return (
