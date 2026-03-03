@@ -18,7 +18,7 @@ const CRITICAL_IMAGES = [
   "/assets/img/hero/lantern.png",
   // About section
   "/assets/img/hero/pagoda-tower.png",
-  "/assets/img/ui/about-sign-with-text.png",
+  "/assets/img/ui/about-sign-arrow.png",
   // Track cards
   "/assets/img/ui/card-frame.png",
   // Footer branding

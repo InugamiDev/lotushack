@@ -1,33 +1,44 @@
 export type Stat = {
   title: string;
+  highlight: string;
   description: string;
   icon: "clock" | "brain" | "map-pin" | "trophy" | "users";
 };
 
 export const stats: Stat[] = [
   {
-    title: "Time",
-    description: "March 20 (20:00) – March 22 (08:00), 36 hours",
+    title: "36 Hours",
+    highlight: "March 20–22",
+    description:
+      "Non-stop hacking from Friday 8 PM to Sunday 8 AM. Build something incredible over one weekend.",
     icon: "clock",
   },
   {
-    title: "Experience",
-    description: "Workshops, mentorship, career opportunities",
+    title: "Level Up",
+    highlight: "Workshops & Mentors",
+    description:
+      "Hands-on workshops, 1-on-1 mentorship from industry pros, and career networking with top tech companies.",
     icon: "brain",
   },
   {
-    title: "Location",
-    description: "VNG Group JSC, District 7, Ho Chi Minh City",
+    title: "VNG Campus",
+    highlight: "Ho Chi Minh City",
+    description:
+      "District 7's premier tech hub — world-class facilities, free meals, and everything you need to build.",
     icon: "map-pin",
   },
   {
-    title: "Prizes",
-    description: "Over 250+ million VND in cash, credits, and sponsored rewards",
+    title: "250M+ VND",
+    highlight: "Prizes & Rewards",
+    description:
+      "Cash prizes, cloud credits, sponsored perks, and exclusive opportunities across multiple award tracks.",
     icon: "trophy",
   },
   {
-    title: "Builders",
-    description: "600+ builders, creators, and hackers from across Vietnam",
+    title: "600+ Hackers",
+    highlight: "From Across Vietnam",
+    description:
+      "Builders, designers, and dreamers — from first-time hackers to seasoned engineers, all under one roof.",
     icon: "users",
   },
 ];
