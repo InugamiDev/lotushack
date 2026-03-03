@@ -159,7 +159,7 @@ function PinnedAbout() {
       className="relative"
       style={{ height: "1000vh" }}
     >
-      <div className="sticky top-0 z-10 flex h-screen items-center overflow-visible">
+      <div className="sticky top-0 flex h-screen items-center overflow-visible">
         {/* Subtle gold glow orb behind cards */}
         <div
           className="pointer-events-none absolute right-[15%] top-1/2 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-gold-400/[0.06] blur-[80px]"
