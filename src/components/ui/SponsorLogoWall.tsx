@@ -74,7 +74,8 @@ const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
 /** Per-sponsor positional nudges */
 const SPONSOR_NUDGES: Record<string, string> = {
   Agora: "translate-y-1 sm:translate-y-1.5",                   // down a bit to align row 2
-  OpenAI: "-translate-x-2 md:-translate-x-4",                  // closer to VNG
+  OpenAI: "translate-x-2 md:translate-x-4",                     // nudge right
+  "VNG Corporation": "-translate-x-2 md:-translate-x-4",       // nudge left
   ElevenLabs: "-translate-x-4 md:-translate-x-8",              // to the left
 };
 
