@@ -10,28 +10,14 @@ export function AboutSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Left: About sign illustration with pagoda behind */}
           <SectionReveal variant="slide-left">
-            <div className="relative mx-auto w-full max-w-lg animate-float-up-down lg:max-w-none overflow-visible">
-              {/* Pagoda tower — bottom-right, half visible */}
-              <div
-                className="pointer-events-none absolute -right-[55%] bottom-[5%] w-[120%] opacity-60"
-                aria-hidden="true"
-              >
-                <Image
-                  src="/assets/img/hero/pagoda-tower.png"
-                  alt=""
-                  width={900}
-                  height={1350}
-                  className="h-auto w-full object-contain"
-                  sizes="(max-width: 1024px) 60vw, 30vw"
-                />
-              </div>
+            <div className="relative mx-auto w-full max-w-xl animate-float-up-down lg:max-w-none overflow-visible -ml-4 sm:-ml-8 lg:-ml-12">
               <Image
                 src="/assets/img/ui/about-sign-with-text.png"
                 alt="Welcome to LotusHacks x HackHarvard Vietnam, the largest 36-hour hackathon in Vietnam. We're bringing together 600 builders, creators, and hackers to Ho Chi Minh City to build bold ideas."
                 width={2048}
                 height={3072}
                 className="relative h-auto w-full"
-                sizes="(max-width: 1024px) 90vw, 45vw"
+                sizes="(max-width: 1024px) 90vw, 50vw"
                 priority
               />
             </div>
