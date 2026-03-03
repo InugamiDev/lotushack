@@ -100,7 +100,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
       className={cn(
         "group relative flex items-center p-0.5 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 md:p-1",
         isCommunity ? "col-span-1" : "col-span-2",
-        row >= 4 ? "justify-start" : "justify-center",
+        row >= 3 ? "justify-start pl-2 md:pl-4" : "justify-center",
       )}
     >
       <Image
