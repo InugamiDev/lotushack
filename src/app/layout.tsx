@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Cinzel, DM_Sans } from "next/font/google";
 import { faqItems } from "@/data/faq";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const cinzel = Cinzel({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "LotusHacks 2026 — Vietnam's Largest Hackathon",
+  title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
   description:
     "Join 600+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City. Over 250M+ VND in prizes.",
   metadataBase: new URL("https://lotushack.org"),
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     canonical: "https://lotushack.org",
   },
   openGraph: {
-    title: "LotusHacks 2026 — Vietnam's Largest Hackathon",
+    title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
     description:
       "Join 600+ builders for a 36-hour hackathon at LotusHacks x HackHarvard 2026. March 20-22 at VNG Campus, Ho Chi Minh City.",
     url: "https://lotushack.org",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LotusHacks 2026 — Vietnam's Largest Hackathon",
+    title: "LotusHacks 2026 \u2014 Vietnam's Largest Hackathon",
     description:
       "Join 600+ builders for a 36-hour hackathon. March 20-22 at VNG Campus, Ho Chi Minh City.",
     images: ["/assets/img/branding/lotushacks-color-logo.png"],
@@ -80,7 +80,7 @@ export const viewport: Viewport = {
 
 /**
  * JSON-LD structured data for the hackathon event.
- * Content is a static constant — safe to inline.
+ * Content is a static constant, safe to inline (no user input).
  */
 function JsonLd() {
   const data = {
@@ -133,18 +133,18 @@ function JsonLd() {
     })),
   };
 
+  /* Both objects are static constants with no user input - safe to serialize */
+  const eventJson = JSON.stringify(data);
+  const faqJson = JSON.stringify(faqData);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        /* Static hardcoded data — no user input, safe to inline */
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-      />
-      <script
-        type="application/ld+json"
-        /* FAQ data from static constants — no user input, safe to inline */
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
-      />
+      <script type="application/ld+json" suppressHydrationWarning>
+        {eventJson}
+      </script>
+      <script type="application/ld+json" suppressHydrationWarning>
+        {faqJson}
+      </script>
     </>
   );
 }
@@ -159,7 +159,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className={`${playfair.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${cinzel.variable} ${dmSans.variable} antialiased`}>
         {children}
       </body>
     </html>

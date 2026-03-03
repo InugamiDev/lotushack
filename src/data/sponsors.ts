@@ -16,7 +16,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "eTest",
     logo: "/assets/img/sponsors/etest.png",
-    lightLogo: "/assets/img/sponsors/etest-white.png",
+    lightLogo: "/assets/svg/sponsors/etest-white.svg",
     url: "https://etest.edu.vn",
     width: 6879,
     height: 1823,
@@ -27,7 +27,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "OpenAI",
     logo: "/assets/img/sponsors/openai-black.png",
-    lightLogo: "/assets/img/sponsors/openai-white.png",
+    lightLogo: "/assets/svg/sponsors/openai-white.svg",
     url: "https://openai.com",
     width: 1604,
     height: 718,
@@ -38,7 +38,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "VNG Corporation",
     logo: "/assets/img/sponsors/vng.png",
-    lightLogo: "/assets/img/sponsors/vng-white.png",
+    lightLogo: "/assets/svg/sponsors/vng-white.svg",
     url: "https://vng.com.vn",
     width: 1040,
     height: 570,
@@ -51,7 +51,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Trae",
     logo: "/assets/img/sponsors/trae-light.png",
-    lightLogo: "/assets/img/sponsors/trae-white.png",
+    lightLogo: "/assets/svg/sponsors/trae-white.svg",
     url: "https://trae.ai",
     width: 3510,
     height: 2482,
@@ -62,10 +62,10 @@ export const sponsors: Sponsor[] = [
   {
     name: "OpenRouter",
     logo: "/assets/img/sponsors/openrouter.png",
-    lightLogo: "/assets/img/sponsors/openrouter.png",
+    lightLogo: "/assets/svg/sponsors/openrouter-white.svg",
     url: "https://openrouter.ai",
     width: 2400,
-    height: 800sd,
+    height: 800,
     tier: "gold",
     description:
       "Unified API gateway for the best AI models — find, compare, and use any LLM through a single interface.",
@@ -73,7 +73,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Agora",
     logo: "/assets/img/sponsors/agora-blue.png",
-    lightLogo: "/assets/img/sponsors/agora-blue.png",
+    lightLogo: "/assets/svg/sponsors/agora-white.svg",
     url: "https://agora.io",
     width: 600,
     height: 600,
@@ -84,7 +84,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "n8n",
     logo: "/assets/img/sponsors/n8n-light.png",
-    lightLogo: "/assets/img/sponsors/n8n-white.png",
+    lightLogo: "/assets/svg/sponsors/n8n-white.svg",
     url: "https://n8n.io",
     width: 576,
     height: 160,
@@ -97,7 +97,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "HRG",
     logo: "/assets/svg/sponsors/hrg-dark.svg",
-    lightLogo: "/assets/svg/sponsors/hrg-dark.svg",
+    lightLogo: "/assets/svg/sponsors/hrg-white.svg",
     url: "https://hackerresidencygroup.com",
     width: 2078,
     height: 600,
@@ -106,7 +106,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "ElevenLabs",
     logo: "/assets/img/sponsors/elevenlabs-black.png",
-    lightLogo: "/assets/img/sponsors/elevenlabs-white.png",
+    lightLogo: "/assets/svg/sponsors/elevenlabs-white.svg",
     url: "https://elevenlabs.io",
     width: 2082,
     height: 270,
@@ -115,7 +115,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Algorithmics",
     logo: "/assets/img/sponsors/algorithmics-dark.png",
-    lightLogo: "/assets/img/sponsors/algorithmics-light.png",
+    lightLogo: "/assets/svg/sponsors/algorithmics-white.svg",
     url: "https://algo.edu.vn",
     width: 4320,
     height: 2160,
@@ -124,7 +124,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Exa",
     logo: "/assets/img/sponsors/exa-blue.png",
-    lightLogo: "/assets/img/sponsors/exa-white.png",
+    lightLogo: "/assets/svg/sponsors/exa-white.svg",
     url: "https://exa.ai",
     width: 1386,
     height: 480,
@@ -135,7 +135,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Lovable",
     logo: "/assets/img/sponsors/lovable-dark.png",
-    lightLogo: "/assets/img/sponsors/lovable-light.png",
+    lightLogo: "/assets/svg/sponsors/lovable-white.svg",
     url: "https://lovable.dev",
     width: 911,
     height: 155,
@@ -144,7 +144,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Redis",
     logo: "/assets/img/sponsors/redis.jpg",
-    lightLogo: "/assets/img/sponsors/redis-white.png",
+    lightLogo: "/assets/svg/sponsors/redis-white.svg",
     url: "https://redis.io",
     width: 2091,
     height: 658,
@@ -162,7 +162,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Veracia",
     logo: "/assets/img/sponsors/veracia.png",
-    lightLogo: "/assets/img/sponsors/veracia-white.png",
+    lightLogo: "/assets/svg/sponsors/veracia-white.svg",
     url: "https://veracia.ai",
     width: 1000,
     height: 1000,
@@ -173,7 +173,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "CoderSchool",
     logo: "/assets/img/sponsors/coderschool.png",
-    lightLogo: "/assets/img/sponsors/coderschool-white.png",
+    lightLogo: "/assets/svg/sponsors/coderschool-white.svg",
     url: "https://coderschool.vn",
     width: 2000,
     height: 1551,
@@ -182,7 +182,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "GreenNode",
     logo: "/assets/img/sponsors/greennode.jpg",
-    lightLogo: "/assets/img/sponsors/greennode-white.png",
+    lightLogo: "/assets/svg/sponsors/greennode-white.svg",
     url: "https://greennode.ai",
     width: 2000,
     height: 2000,
@@ -191,6 +191,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "AI.SEA",
     logo: "/assets/img/sponsors/aisea.png",
+    lightLogo: "/assets/svg/sponsors/aisea-white.svg",
     url: "https://aisea.builders",
     width: 512,
     height: 512,
@@ -199,7 +200,8 @@ export const sponsors: Sponsor[] = [
   {
     name: "The Flour Donut",
     logo: "/assets/img/sponsors/donut.png",
-    url: "https://theflourdepartment.cococart.co",
+    lightLogo: "/assets/svg/sponsors/donut-white.svg",
+    url: "https://theflourdonut.com",
     width: 500,
     height: 500,
     tier: "community",
@@ -207,6 +209,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "valsea",
     logo: "/assets/img/sponsors/valsea.png",
+    lightLogo: "/assets/svg/sponsors/valsea-white.svg",
     url: "https://valsea.app",
     width: 1024,
     height: 1024,
@@ -215,7 +218,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "FreightPilot.AI",
     logo: "/assets/img/sponsors/freightpilot.png",
-    lightLogo: "/assets/img/sponsors/freightpilot-white.png",
+    lightLogo: "/assets/svg/sponsors/freightpilot-white.svg",
     url: "https://freightpilot.ai",
     width: 300,
     height: 100,

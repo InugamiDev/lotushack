@@ -93,10 +93,10 @@ export function Navbar() {
               <a
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm",
+                  "font-[family-name:var(--font-heading)] text-base font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm",
                   activeSection === link.href.slice(1)
                     ? "text-gold-400"
-                    : "text-text-secondary hover:text-gold-400",
+                    : "text-cream-50/80 hover:text-gold-400",
                 )}
               >
                 {link.label}
@@ -167,10 +167,10 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className={cn(
-                    "rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200 hover:bg-forest-800 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950",
+                    "rounded-lg px-4 py-3 font-[family-name:var(--font-heading)] text-lg font-semibold tracking-wide transition-colors duration-200 hover:bg-forest-800 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950",
                     activeSection === link.href.slice(1)
                       ? "text-gold-400 bg-forest-800/50"
-                      : "text-text-secondary",
+                      : "text-cream-50/80",
                   )}
                 >
                   {link.label}

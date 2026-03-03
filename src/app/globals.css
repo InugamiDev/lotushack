@@ -51,7 +51,7 @@
     --color-text-secondary: oklch(0.78 0.015 80);
     --color-text-muted: oklch(0.55 0.01 90);
 
-    /* Fonts — Playfair Display for headings, DM Sans for body */
+    /* Fonts — Cinzel for headings, DM Sans for body */
     --font-sans: var(--font-body);
     --font-heading: var(--font-heading);
     --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
@@ -297,8 +297,8 @@
 /* ─── Section heading utility ─── */
 .section-heading {
     font-family: var(--font-heading), serif;
-    font-variant: small-caps;
-    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 /* ─── Celestial utility classes ─── */

@@ -10,13 +10,13 @@ export function FAQSection() {
         <SectionReveal>
           <div className="text-center">
             <h2
-              className="section-heading text-3xl font-bold text-text-primary sm:text-4xl"
+              className="section-heading text-4xl font-bold tracking-[0.15em] text-cream-50 sm:text-5xl md:text-6xl"
               style={{ textWrap: "balance" }}
             >
-              Frequently Asked Questions
+              FAQ
             </h2>
-            <div className="mx-auto mt-3 h-px w-16 shimmer-gold" />
-            <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
+            <div className="mx-auto mt-4 h-px w-20 shimmer-gold" />
+            <p className="mx-auto mt-5 max-w-2xl text-base text-text-secondary sm:text-lg">
               Got questions? We&apos;ve got answers. If you don&apos;t find what
               you&apos;re looking for, reach out to us at{" "}
               <a

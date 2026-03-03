@@ -19,7 +19,7 @@ export function AccordionItem({ item }: AccordionItemProps) {
         className="flex w-full items-center justify-between gap-4 py-6 text-left transition-colors duration-200 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm touch-action-manipulation"
         aria-expanded={open}
       >
-        <span className="text-base font-medium text-text-primary">
+        <span className="font-[family-name:var(--font-heading)] text-base font-medium text-cream-50 sm:text-lg">
           {item.question}
         </span>
         <svg

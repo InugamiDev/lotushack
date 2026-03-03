@@ -31,7 +31,7 @@ export function StatCard({ stat, index }: StatCardProps) {
         />
         {/* Content inside cream interior */}
         <div className="relative flex h-full flex-col items-center justify-center px-[18.2%] pt-[18%] pb-[18%] text-center">
-          <p className="text-base font-bold text-sienna-600 sm:text-lg">
+          <p className="font-[family-name:var(--font-heading)] text-base font-bold text-sienna-600 sm:text-lg">
             {stat.title}
           </p>
           <p className="mt-1.5 text-[0.65rem] leading-snug text-forest-950/60 sm:text-xs">

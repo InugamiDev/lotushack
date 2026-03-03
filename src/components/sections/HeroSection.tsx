@@ -143,7 +143,7 @@ export function HeroSection() {
       >
         {/* Title */}
         <h1
-          className="section-heading text-5xl font-bold tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl"
+          className="section-heading text-5xl font-bold tracking-[0.05em] text-cream-50 sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ textWrap: "balance" }}
         >
           LOTUS
@@ -151,18 +151,18 @@ export function HeroSection() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">
+        <p className="font-[family-name:var(--font-heading)] text-sm font-medium uppercase tracking-[0.2em] text-cream-100/60 sm:text-base">
           Presented by LotusHacks &times; HackHarvard
         </p>
 
         {/* Date */}
-        <p className="text-lg text-gold-400 sm:text-xl">
-          March 20–22, 2026 &middot; VNG Campus
+        <p className="font-[family-name:var(--font-heading)] text-lg tracking-[0.1em] text-gold-400 sm:text-xl">
+          Mar 20&ndash;22, 2026
         </p>
 
         {/* Tagline */}
         <p
-          className="max-w-2xl text-lg text-text-secondary sm:text-xl"
+          className="max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl"
           style={{ textWrap: "balance" }}
         >
           Join 600+{" "}

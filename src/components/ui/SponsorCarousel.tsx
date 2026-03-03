@@ -129,7 +129,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
 
             {/* Description */}
             <div className="flex-1 text-center sm:text-left">
-              <h3 className="text-lg font-semibold text-text-primary sm:text-xl">
+              <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold tracking-wide text-cream-50 sm:text-xl">
                 {current.name}
               </h3>
               {current.description && (

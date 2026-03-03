@@ -13,11 +13,11 @@ export function SponsorsSection() {
         <SectionReveal variant="fade-scale">
           <div className="flex flex-col items-center gap-3">
             <LotusDecoration size="md" variant="gold" />
-            <h2 className="section-heading text-3xl font-bold text-text-primary sm:text-4xl">
-              Our Partners
+            <h2 className="section-heading text-4xl font-bold tracking-[0.15em] text-cream-50 sm:text-5xl md:text-6xl">
+              Sponsors
             </h2>
-            <div className="mx-auto mt-3 h-px w-16 shimmer-gold" />
-            <p className="text-base text-text-secondary">
+            <div className="mx-auto mt-4 h-px w-20 shimmer-gold" />
+            <p className="text-base text-text-secondary sm:text-lg">
               Backed by the companies building the future.
             </p>
           </div>

@@ -41,7 +41,7 @@ export function Footer() {
               className="h-auto w-auto"
               aria-hidden="true"
             />
-            <span className="text-lg font-semibold text-text-primary">
+            <span className="font-[family-name:var(--font-heading)] text-lg font-semibold tracking-wider text-cream-50">
               LotusHack
             </span>
           </div>
@@ -53,7 +53,7 @@ export function Footer() {
 
         {/* Links */}
         <div>
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+          <h3 className="mb-4 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-widest text-cream-100/50">
             Navigate
           </h3>
           <ul className="flex flex-col gap-3">
@@ -72,7 +72,7 @@ export function Footer() {
 
         {/* Socials */}
         <div>
-          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted">
+          <h3 className="mb-4 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-widest text-cream-100/50">
             Connect
           </h3>
           <div className="flex gap-4">

@@ -40,7 +40,7 @@ export function TrackCard({ track, index }: TrackCardProps) {
 
         {/* Text within cream interior */}
         <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden px-[15.6%] pt-[16%] pb-[10%] text-center">
-          <h3 className="section-heading text-xl font-bold text-sienna-600 sm:text-2xl lg:text-3xl">
+          <h3 className="section-heading text-xl font-bold tracking-[0.05em] text-sienna-600 sm:text-2xl lg:text-3xl">
             {track.name}
           </h3>
 

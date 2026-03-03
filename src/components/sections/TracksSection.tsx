@@ -8,11 +8,11 @@ export function TracksSection() {
       <div className="mx-auto max-w-7xl px-6">
         <SectionReveal>
           <div className="text-center">
-            <h2 className="section-heading text-3xl font-bold text-text-primary sm:text-4xl">
-              Hackathon Tracks
+            <h2 className="section-heading text-4xl font-bold tracking-[0.1em] text-cream-50 sm:text-5xl md:text-6xl">
+              Tracks
             </h2>
-            <div className="mx-auto mt-3 h-px w-16 shimmer-gold" />
-            <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
+            <div className="mx-auto mt-4 h-px w-20 shimmer-gold" />
+            <p className="mx-auto mt-5 max-w-2xl text-base text-text-secondary sm:text-lg">
               Build across 4 real-world tracks. Choose the challenge that
               matches your passion — each with dedicated prizes, mentors, and
               judging criteria.
