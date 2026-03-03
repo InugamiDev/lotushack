@@ -100,7 +100,11 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
       className={cn(
         "group relative flex items-center justify-center p-0.5 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 md:p-1",
         isCommunity ? "col-span-1" : "col-span-2",
+        row === 1 && "translate-x-1 md:translate-x-2",
         row === 2 && "-translate-x-3 md:-translate-x-6",
+        row === 3 && "-translate-x-5 md:-translate-x-10",
+        row === 4 && "-translate-x-3 md:-translate-x-6",
+        row === 5 && "-translate-x-3 md:-translate-x-6",
       )}
     >
       <Image
@@ -129,7 +133,7 @@ export function SponsorLogoWall({ sponsors }: SponsorLogoWallProps) {
   const all = [...sorted, ...remaining];
 
   return (
-    <div className="px-2 py-3 sm:px-4 sm:py-4">
+    <div className="translate-x-3 md:translate-x-6 px-2 py-3 sm:px-4 sm:py-4">
       <h3 className="section-heading mb-3 text-center text-2xl font-semibold tracking-[0.25em] text-gold-500 sm:mb-4 sm:text-3xl">
         Our Sponsors
       </h3>

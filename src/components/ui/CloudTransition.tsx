@@ -46,7 +46,41 @@ function buildCloudPath(index: number): string {
   return `${top}${bottom} Z`;
 }
 
+/**
+ * Maps a segment index (0..SEGMENT_COUNT-1) to a gradient stop color.
+ * Creates a flowing wave: forest-950 → jade-600 → gold-400 → jade-600 → forest-950
+ */
+function segmentColor(index: number): string {
+  const t = index / (SEGMENT_COUNT - 1); // 0 → 1
+
+  // Two-cycle sine wave so the gradient "breathes" across the segments
+  const wave = Math.sin(t * Math.PI * 2.5);
+
+  // Interpolate lightness & chroma based on wave position
+  // forest-950: L=0.12 C=0.03 H=155
+  // jade-600:   L=0.50 C=0.14 H=155
+  // gold-400:   L=0.78 C=0.16 H=75
+  if (wave > 0) {
+    // forest → jade
+    const p = wave;
+    const l = 0.12 + p * 0.22; // 0.12 → 0.34
+    const c = 0.03 + p * 0.08; // 0.03 → 0.11
+    return `oklch(${l} ${c} 155)`;
+  } else {
+    // forest → gold (subtle warm accent)
+    const p = -wave;
+    const l = 0.12 + p * 0.18; // 0.12 → 0.30
+    const c = 0.03 + p * 0.06; // 0.03 → 0.09
+    const h = 155 - p * 60;    // 155 → 95 (toward gold hue)
+    return `oklch(${l} ${c} ${h})`;
+  }
+}
+
 function CloudWisp({ index }: { index: number }) {
+  const gradId = `wave-grad-${index}`;
+  const color = segmentColor(index);
+  const nextColor = segmentColor(Math.min(index + 1, SEGMENT_COUNT - 1));
+
   return (
     <svg
       viewBox="0 0 1600 100"
@@ -54,9 +88,15 @@ function CloudWisp({ index }: { index: number }) {
       className="absolute inset-0 h-full w-full"
       aria-hidden="true"
     >
+      <defs>
+        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor={color} />
+          <stop offset="100%" stopColor={nextColor} />
+        </linearGradient>
+      </defs>
       <path
         d={buildCloudPath(index)}
-        className="fill-forest-950"
+        fill={`url(#${gradId})`}
       />
     </svg>
   );
