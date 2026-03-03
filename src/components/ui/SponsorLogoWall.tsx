@@ -45,8 +45,6 @@ const sponsorOrder = [
   "CoderSchool",
 ];
 
-const heroSponsors = new Set(["eTest", "OpenAI", "VNG Corporation"]);
-
 const communitySponsors = new Set([
   "Veracia",
   "The Flour Donut",
@@ -56,6 +54,27 @@ const communitySponsors = new Set([
   "CoderSchool",
 ]);
 
+/** Row-based sizing — each visual row gets a consistent height */
+const ROW_HEIGHTS = [
+  "max-h-16 sm:max-h-24 md:max-h-28",   // Row 1: Hero — biggest
+  "max-h-10 sm:max-h-16 md:max-h-20",    // Row 2: Gold
+  "max-h-10 sm:max-h-16 md:max-h-20",    // Row 3: Gold + Bronze (same as row 2)
+  "max-h-8 sm:max-h-14 md:max-h-[4.5rem]", // Row 4: Silver
+  "max-h-7 sm:max-h-11 md:max-h-14",     // Row 5: Silver + Community
+  "max-h-8 sm:max-h-12 md:max-h-14",     // Row 6: Community
+] as const;
+
+/** Map each sponsor name → its visual row index */
+const sponsorRowMap = new Map<string, number>();
+// Rows 1–5: 3 sponsors each
+for (let i = 0; i < 15; i++) {
+  sponsorRowMap.set(sponsorOrder[i], Math.floor(i / 3));
+}
+// Row 6: community (indices 15–20)
+for (let i = 15; i < sponsorOrder.length; i++) {
+  sponsorRowMap.set(sponsorOrder[i], 5);
+}
+
 /** Detect square-ish logos to apply rounded corners */
 function isSquareLogo(w: number, h: number): boolean {
   const ratio = w / h;
@@ -63,21 +82,14 @@ function isSquareLogo(w: number, h: number): boolean {
 }
 
 function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
-  const isHero = heroSponsors.has(sponsor.name);
   const isCommunity = communitySponsors.has(sponsor.name);
   const square = isSquareLogo(sponsor.width, sponsor.height);
 
   const logoSrc = sponsor.lightLogo ?? sponsor.logo;
   const isSvg = logoSrc.endsWith(".svg");
 
-  const logoHeight: Record<string, string> = {
-    hero: "max-h-14 sm:max-h-20 md:max-h-[6.5rem]",
-    gold: "max-h-10 sm:max-h-16 md:max-h-20",
-    silver: "max-h-8 sm:max-h-12 md:max-h-16",
-    bronze: "max-h-8 sm:max-h-12 md:max-h-16",
-    community: "max-h-8 sm:max-h-10 md:max-h-14",
-  };
-  const heightClass = logoHeight[sponsor.tier] ?? logoHeight.silver;
+  const row = sponsorRowMap.get(sponsor.name) ?? 4;
+  const heightClass = ROW_HEIGHTS[row];
 
   return (
     <a
