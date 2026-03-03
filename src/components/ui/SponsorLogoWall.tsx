@@ -60,8 +60,8 @@ const ROW_HEIGHTS = [
   "max-h-10 sm:max-h-16 md:max-h-20",    // Row 2: Gold
   "max-h-10 sm:max-h-16 md:max-h-20",    // Row 3: Gold + Bronze (same as row 2)
   "max-h-8 sm:max-h-14 md:max-h-[4.5rem]", // Row 4: Silver
-  "max-h-7 sm:max-h-11 md:max-h-14",     // Row 5: Silver + Community
-  "max-h-8 sm:max-h-12 md:max-h-14",     // Row 6: Community
+  "max-h-8 sm:max-h-12 md:max-h-16",     // Row 5: Silver + Community
+  "max-h-9 sm:max-h-14 md:max-h-16",     // Row 6: Community
 ] as const;
 
 /** Map each sponsor name → its visual row index */
@@ -98,8 +98,9 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
       rel="noopener noreferrer"
       aria-label={`Visit ${sponsor.name}`}
       className={cn(
-        "group relative flex items-center justify-center p-0.5 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 md:p-1",
+        "group relative flex items-center p-0.5 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 md:p-1",
         isCommunity ? "col-span-1" : "col-span-2",
+        row >= 4 ? "justify-start" : "justify-center",
       )}
     >
       <Image
