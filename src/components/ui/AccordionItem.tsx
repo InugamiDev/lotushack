@@ -50,7 +50,7 @@ export function AccordionItem({ item }: AccordionItemProps) {
             }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-sm leading-relaxed text-text-secondary">
+            <p className="pb-6 text-sm leading-relaxed text-cream-50/85">
               {item.answer}
             </p>
           </motion.div>

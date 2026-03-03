@@ -61,6 +61,17 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
+      {/* Golden glow line under navbar when scrolled */}
+      <div
+        className={cn(
+          "absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300",
+          scrolled ? "opacity-100" : "opacity-0",
+        )}
+        aria-hidden="true"
+      >
+        <div className="h-px bg-gradient-to-r from-transparent via-gold-400/50 to-transparent" />
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-gold-400/20 to-transparent blur-sm" />
+      </div>
       <div
         className={cn(
           "mx-auto flex max-w-7xl items-center justify-between px-6 transition-all duration-300",

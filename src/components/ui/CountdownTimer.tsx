@@ -18,7 +18,7 @@ function Unit({ value, label }: UnitProps) {
       >
         {value}
       </span>
-      <span className="text-xs font-medium uppercase tracking-widest text-text-muted">
+      <span className="font-[family-name:var(--font-heading)] text-xs font-medium uppercase tracking-[0.2em] text-text-muted">
         {label}
       </span>
     </div>

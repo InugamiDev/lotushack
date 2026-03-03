@@ -37,7 +37,13 @@ export default function Home() {
       </div>
 
       <div className="relative z-10">
-<Navbar />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold-400 focus:px-6 focus:py-3 focus:text-base focus:font-semibold focus:text-forest-950 focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        <Navbar />
         <main id="main">
           <HeroSection />
 

@@ -61,7 +61,7 @@ export function Footer() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-text-secondary transition-colors duration-200 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-900 rounded-sm"
+                  className="font-[family-name:var(--font-heading)] text-sm tracking-wide text-text-secondary transition-colors duration-200 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-900 rounded-sm"
                 >
                   {link.label}
                 </a>

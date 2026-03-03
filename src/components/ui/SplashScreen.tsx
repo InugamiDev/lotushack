@@ -6,12 +6,25 @@ import { motion, AnimatePresence } from "motion/react";
 import { LotusDecoration } from "./LotusDecoration";
 import { CloudTransition } from "./CloudTransition";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { sponsors } from "@/data/sponsors";
 
+/** All images/SVGs used across the site — preloaded during splash */
 const CRITICAL_IMAGES = [
+  // Page background
   "/assets/img/hero/bg.avif",
-  "/assets/img/hero/pagoda-tower.png",
+  // Hero section
   "/assets/img/hero/logo.png",
+  "/assets/img/hero/dragon-hack.png",
+  "/assets/img/hero/lantern.png",
+  // About section
+  "/assets/img/hero/pagoda-tower.png",
   "/assets/img/ui/about-sign-with-text.png",
+  // Track cards
+  "/assets/img/ui/card-frame.png",
+  // Footer branding
+  "/assets/svg/branding/hackharvard-logo.svg",
+  // Sponsor logos (lightLogo preferred, fallback to logo)
+  ...sponsors.map((s) => s.lightLogo ?? s.logo),
 ];
 
 export function SplashScreen() {

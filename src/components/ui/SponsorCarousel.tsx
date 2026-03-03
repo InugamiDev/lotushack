@@ -129,7 +129,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
 
             {/* Description */}
             <div className="flex-1 text-center sm:text-left">
-              <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold tracking-wide text-cream-50 sm:text-xl">
+              <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold tracking-wide text-gold-400 sm:text-2xl">
                 {current.name}
               </h3>
               {current.description && (
@@ -141,12 +141,12 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
                 href={current.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold-400 transition-colors duration-200 hover:text-gold-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm"
+                className="mt-4 inline-flex items-center gap-1.5 text-base font-medium text-gold-400 underline decoration-gold-400/30 underline-offset-4 transition-all duration-200 hover:text-gold-300 hover:decoration-gold-300/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm"
               >
                 Learn more
                 <svg
-                  width="14"
-                  height="14"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
