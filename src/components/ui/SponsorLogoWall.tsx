@@ -70,11 +70,14 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
   const logoSrc = sponsor.lightLogo ?? sponsor.logo;
   const isSvg = logoSrc.endsWith(".svg");
 
-  const logoHeight = isHero
-    ? "max-h-12 sm:max-h-20 md:max-h-24"
-    : isCommunity
-      ? "max-h-10 sm:max-h-14 md:max-h-16"
-      : "max-h-8 sm:max-h-14 md:max-h-16";
+  const logoHeight: Record<string, string> = {
+    hero: "max-h-14 sm:max-h-20 md:max-h-[6.5rem]",
+    gold: "max-h-10 sm:max-h-16 md:max-h-20",
+    silver: "max-h-8 sm:max-h-12 md:max-h-16",
+    bronze: "max-h-8 sm:max-h-12 md:max-h-16",
+    community: "max-h-8 sm:max-h-10 md:max-h-14",
+  };
+  const heightClass = logoHeight[sponsor.tier] ?? logoHeight.silver;
 
   return (
     <a
@@ -84,7 +87,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
       aria-label={`Visit ${sponsor.name}`}
       className={cn(
         "group relative flex items-center justify-center p-0.5 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 md:p-1",
-        isCommunity ? "col-span-1" : "col-span-1 md:col-span-2",
+        isCommunity ? "col-span-1" : "col-span-2",
       )}
     >
       <Image
@@ -95,7 +98,7 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
         unoptimized={isSvg}
         className={cn(
           "relative h-auto w-auto object-contain opacity-70 transition-all duration-300 group-hover:opacity-100",
-          logoHeight,
+          heightClass,
           square && "rounded-xl",
         )}
       />
@@ -119,7 +122,7 @@ export function SponsorLogoWall({ sponsors }: SponsorLogoWallProps) {
       </h3>
 
       <div
-        className="grid grid-cols-2 gap-0 md:grid-cols-6 md:gap-0"
+        className="grid grid-cols-6 gap-0"
         style={{ gridAutoRows: "minmax(44px, auto)" }}
       >
         {all.map((sponsor) => (
