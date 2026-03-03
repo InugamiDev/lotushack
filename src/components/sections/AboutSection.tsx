@@ -10,7 +10,7 @@ export function AboutSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Left: About sign illustration with pagoda behind */}
           <SectionReveal variant="slide-left">
-            <div className="relative mx-auto w-full max-w-xl animate-float-up-down lg:max-w-none overflow-visible -ml-4 sm:-ml-8 lg:-ml-12">
+            <div className="relative mx-auto w-full max-w-xl animate-float-up-down lg:max-w-none overflow-visible">
               <Image
                 src="/assets/img/ui/about-sign-with-text.png"
                 alt="Welcome to LotusHacks x HackHarvard Vietnam, the largest 36-hour hackathon in Vietnam. We're bringing together 600 builders, creators, and hackers to Ho Chi Minh City to build bold ideas."
