@@ -12,7 +12,7 @@ export function AccordionItem({ item }: AccordionItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-gold-400/15">
+    <div>
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -50,9 +50,9 @@ export function AccordionItem({ item }: AccordionItemProps) {
             }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-sm leading-relaxed text-cream-50/85">
+            <div className="pb-6 text-sm leading-relaxed text-cream-50/85">
               {item.answer}
-            </p>
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

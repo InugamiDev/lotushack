@@ -2,6 +2,14 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { StaggerReveal } from "@/components/ui/StaggerReveal";
 import { AccordionItem } from "@/components/ui/AccordionItem";
 import { faqItems } from "@/data/faq";
+import type { FAQCategory } from "@/data/faq";
+
+const categories: { key: FAQCategory; label: string }[] = [
+  { key: "general", label: "General" },
+  { key: "tracks", label: "Tracks & Prizes" },
+  { key: "registration", label: "Registration & Teams" },
+  { key: "logistics", label: "Logistics" },
+];
 
 export function FAQSection() {
   return (
@@ -30,15 +38,32 @@ export function FAQSection() {
           </div>
         </SectionReveal>
 
-        <StaggerReveal
-          variant="slide-up"
-          staggerDelay={0.1}
-          className="mt-12 divide-y divide-gold-400/15 border-t border-gold-400/15"
-        >
-          {faqItems.map((item) => (
-            <AccordionItem key={item.question} item={item} />
-          ))}
-        </StaggerReveal>
+        <div className="mt-12 space-y-10">
+          {categories.map((cat) => {
+            const items = faqItems.filter((item) => item.category === cat.key);
+            if (items.length === 0) return null;
+
+            return (
+              <div key={cat.key}>
+                <SectionReveal>
+                  <h3 className="mb-2 font-[family-name:var(--font-heading)] text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">
+                    {cat.label}
+                  </h3>
+                </SectionReveal>
+
+                <StaggerReveal
+                  variant="slide-up"
+                  staggerDelay={0.08}
+                  className="divide-y divide-gold-400/15 border-t border-b border-gold-400/15"
+                >
+                  {items.map((item) => (
+                    <AccordionItem key={item.question} item={item} />
+                  ))}
+                </StaggerReveal>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

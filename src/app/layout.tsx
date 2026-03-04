@@ -135,7 +135,7 @@ function JsonLd() {
       name: item.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.answer,
+        text: item.plainAnswer,
       },
     })),
   };
