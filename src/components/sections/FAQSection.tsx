@@ -1,6 +1,7 @@
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { StaggerReveal } from "@/components/ui/StaggerReveal";
 import { AccordionItem } from "@/components/ui/AccordionItem";
+import { LotusDecoration } from "@/components/ui/LotusDecoration";
 import { faqItems } from "@/data/faq";
 import type { FAQCategory } from "@/data/faq";
 
@@ -13,8 +14,33 @@ const categories: { key: FAQCategory; label: string }[] = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="py-24 sm:py-36">
-      <div className="mx-auto max-w-3xl px-6">
+    <section id="faq" className="relative py-24 sm:py-36 overflow-hidden">
+      {/* Floating glowing lotus decorations */}
+      <LotusDecoration
+        size="lg"
+        variant="gold"
+        className="pointer-events-none absolute left-[5%] top-[12%] opacity-10 animate-lotus-drift-glow drop-shadow-[0_0_10px_oklch(0.78_0.16_75/0.5)] motion-reduce:animate-none"
+      />
+      <LotusDecoration
+        size="md"
+        variant="gold"
+        className="pointer-events-none absolute right-[8%] top-[25%] opacity-[0.07] animate-lotus-float-glow drop-shadow-[0_0_8px_oklch(0.78_0.16_75/0.4)] motion-reduce:animate-none"
+        style={{ animationDelay: "3s" }}
+      />
+      <LotusDecoration
+        size="lg"
+        variant="gold"
+        className="pointer-events-none absolute right-[4%] bottom-[18%] opacity-10 animate-lotus-drift-glow drop-shadow-[0_0_10px_oklch(0.78_0.16_75/0.5)] motion-reduce:animate-none"
+        style={{ animationDelay: "1.5s" }}
+      />
+      <LotusDecoration
+        size="md"
+        variant="gold"
+        className="pointer-events-none absolute left-[7%] bottom-[30%] opacity-[0.07] animate-lotus-float-glow drop-shadow-[0_0_8px_oklch(0.78_0.16_75/0.4)] motion-reduce:animate-none"
+        style={{ animationDelay: "4s" }}
+      />
+
+      <div className="relative mx-auto max-w-3xl px-6">
         <SectionReveal>
           <div className="text-center">
             <h2

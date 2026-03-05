@@ -65,6 +65,8 @@
     --animate-fade-up: fade-up 0.6s ease-out both;
     --animate-lotus-float: lotus-float 7s ease-in-out infinite;
     --animate-lotus-drift: lotus-drift 10s ease-in-out infinite;
+    --animate-lotus-float-glow: lotus-float 7s ease-in-out infinite, glow-pulse 4s ease-in-out infinite;
+    --animate-lotus-drift-glow: lotus-drift 10s ease-in-out infinite, glow-pulse 5s ease-in-out infinite;
     --animate-float-up-down: float-up-down 6s ease-in-out infinite;
     --animate-float-down-up: float-down-up 6s ease-in-out infinite;
     --animate-float-left-right: float-left-right 7s ease-in-out infinite;
