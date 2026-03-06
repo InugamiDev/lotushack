@@ -13,7 +13,7 @@ function Unit({ value, label }: UnitProps) {
   return (
     <div className="flex flex-col items-center gap-2">
       <span
-        className="min-w-[3.5rem] text-center font-mono text-4xl font-bold tabular-nums text-gold-400 sm:text-5xl md:text-6xl"
+        className="min-w-[2.5rem] text-center font-mono text-3xl font-bold tabular-nums text-gold-400 sm:min-w-[3.5rem] sm:text-5xl md:text-6xl"
         style={{ textShadow: "0 0 20px oklch(0.78 0.16 75 / 0.4)" }}
       >
         {value}
@@ -28,7 +28,7 @@ function Unit({ value, label }: UnitProps) {
 function Separator() {
   return (
     <span
-      className="self-start pt-2 font-mono text-3xl font-bold text-gold-400/40 sm:text-4xl md:text-5xl"
+      className="self-start pt-1 font-mono text-2xl font-bold text-gold-400/40 sm:pt-2 sm:text-4xl md:text-5xl"
       aria-hidden="true"
     >
       :

@@ -121,7 +121,7 @@ export function HeroSection() {
 
       {/* Dragon silhouette — absolute, large, black filter */}
       <motion.div
-        className="pointer-events-none absolute left-1/2 top-1/2 z-[1] w-[500px] -translate-x-1/2 -translate-y-1/2 sm:w-[700px] md:w-[900px] lg:w-[1100px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-[1] w-[85vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1100px]"
         style={reducedMotion ? undefined : { y: contentY }}
         aria-hidden="true"
       >
@@ -132,13 +132,13 @@ export function HeroSection() {
           height={1024}
           priority
           className="h-auto w-full object-contain brightness-0 opacity-30"
-          sizes="(max-width: 640px) 500px, (max-width: 768px) 700px, (max-width: 1024px) 900px, 1100px"
+          sizes="(max-width: 640px) 85vw, (max-width: 768px) 700px, (max-width: 1024px) 900px, 1100px"
         />
       </motion.div>
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center gap-8 px-6 text-center"
+        className="relative z-10 flex flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6"
         style={reducedMotion ? undefined : { y: contentY }}
       >
         {/* Title */}

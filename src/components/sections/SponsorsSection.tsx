@@ -8,7 +8,7 @@ const featuredSponsors = sponsors.filter((s) => s.logo && s.description);
 
 export function SponsorsSection() {
   return (
-    <section id="sponsors" className="py-24 sm:py-36">
+    <section id="sponsors" className="overflow-hidden py-24 sm:py-36">
       <div className="mx-auto max-w-5xl px-6">
         <SectionReveal variant="fade-scale">
           <div className="flex flex-col items-center gap-3">

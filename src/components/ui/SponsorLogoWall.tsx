@@ -56,27 +56,27 @@ const communitySponsors = new Set([
 
 /** Row-based sizing — each visual row gets a consistent height */
 const ROW_HEIGHTS = [
-  "max-h-16 sm:max-h-24 md:max-h-28",      // Row 1: Hero — biggest
-  "max-h-10 sm:max-h-16 md:max-h-20",      // Row 2: Gold
-  "max-h-10 sm:max-h-16 md:max-h-20",      // Row 3: Gold + Bronze
+  "max-h-16 sm:max-h-24 md:max-h-28", // Row 1: Hero — biggest
+  "max-h-10 sm:max-h-16 md:max-h-20", // Row 2: Gold
+  "max-h-10 sm:max-h-16 md:max-h-20", // Row 3: Gold + Bronze
   "max-h-8 sm:max-h-14 md:max-h-[4.5rem]", // Row 4: Silver
-  "max-h-9 sm:max-h-14 md:max-h-18",       // Row 5: Silver + Community (bigger)
-  "max-h-9 sm:max-h-14 md:max-h-16",       // Row 6: Community (bigger)
+  "max-h-9 sm:max-h-14 md:max-h-18", // Row 5: Silver + Community (bigger)
+  "max-h-9 sm:max-h-14 md:max-h-16", // Row 6: Community (bigger)
 ] as const;
 
 /** Per-sponsor size overrides */
 const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
-  Agora: "max-h-12 sm:max-h-18 md:max-h-22",          // Row 2: bigger
-  Exa: "max-h-6 sm:max-h-10 md:max-h-12",             // Row 4: smaller
-  Algorithmics: "max-h-12 sm:max-h-18 md:max-h-22",   // Row 5: bigger
+  Agora: "max-h-12 sm:max-h-18 md:max-h-22", // Row 2: bigger
+  Exa: "max-h-6 sm:max-h-10 md:max-h-12", // Row 4: smaller
+  Algorithmics: "max-h-12 sm:max-h-18 md:max-h-22", // Row 5: bigger
 };
 
 /** Per-sponsor positional nudges */
 const SPONSOR_NUDGES: Record<string, string> = {
-  Agora: "translate-y-1 sm:translate-y-1.5",                   // down a bit to align row 2
-  OpenAI: "translate-x-2 md:translate-x-4",                     // nudge right
-  "VNG Corporation": "-translate-x-2 md:-translate-x-4",       // nudge left
-  ElevenLabs: "-translate-x-4 md:-translate-x-8",              // to the left
+  Agora: "translate-y-1 sm:translate-y-1.5", // down a bit to align row 2
+  OpenAI: "translate-x-2 md:translate-x-4", // nudge right
+  "VNG Corporation": "-translate-x-2 md:-translate-x-4", // nudge left
+  ElevenLabs: "-translate-x-4 md:-translate-x-8", // to the left
 };
 
 /** Map each sponsor name → its visual row index */
@@ -150,11 +150,7 @@ export function SponsorLogoWall({ sponsors }: SponsorLogoWallProps) {
   const all = [...sorted, ...remaining];
 
   return (
-    <div className="translate-x-3 md:translate-x-6 px-2 py-3 sm:px-4 sm:py-4">
-      <h3 className="section-heading mb-3 text-center text-2xl font-semibold tracking-[0.25em] text-gold-500 sm:mb-4 sm:text-3xl">
-        Our Sponsors
-      </h3>
-
+    <div className="translate-x-1 sm:translate-x-3 md:translate-x-6 px-2 py-3 sm:px-4 sm:py-4">
       <div
         className="grid grid-cols-6 gap-0"
         style={{ gridAutoRows: "minmax(44px, auto)" }}

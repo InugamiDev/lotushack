@@ -75,6 +75,8 @@
     --animate-skeleton-pulse: skeleton-pulse 2s ease-in-out infinite;
     --animate-celestial-glow: celestial-glow 6s ease-in-out infinite;
     --animate-gold-shimmer: gold-shimmer 8s linear infinite;
+    --animate-marquee-left: marquee-left 40s linear infinite;
+    --animate-marquee-right: marquee-right 40s linear infinite;
 }
 
 /* ─── Keyframes ─── */
@@ -263,6 +265,33 @@
     }
 }
 
+@keyframes marquee-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* ─── Marquee utility classes ─── */
+.marquee-left {
+    animation: marquee-left 40s linear infinite;
+}
+
+.marquee-right {
+    animation: marquee-right 40s linear infinite;
+}
+
 /* ─── Cloud clip-path shapes ─── */
 .cloud-shape-left {
     clip-path: polygon(
@@ -340,7 +369,7 @@ body {
     background-color: var(--color-forest-950);
     color: var(--color-text-primary);
     font-family: var(--font-sans), serif;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

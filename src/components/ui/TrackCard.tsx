@@ -28,7 +28,10 @@ export function TrackCard({ track, index }: TrackCardProps) {
       />
 
       {/* Frame + content — preserves card-frame.png natural ratio */}
-      <div className="relative aspect-[1264/1724]">
+      <div
+        className="relative aspect-[1264/1724]"
+        style={{ containerType: "inline-size" }}
+      >
         <Image
           src="/assets/img/ui/card-frame.png"
           alt=""
@@ -38,17 +41,29 @@ export function TrackCard({ track, index }: TrackCardProps) {
           aria-hidden="true"
         />
 
-        {/* Text within cream interior */}
-        <div className="absolute inset-0 flex flex-col items-center overflow-hidden px-[20%] pt-[53%] pb-[10%] text-center">
-          <h3 className="section-heading text-xl font-bold tracking-[0.05em] text-sienna-600 sm:text-2xl lg:text-3xl">
+        {/* Text within cream interior — all dimensions in cqw so everything scales with card */}
+        <div
+          className="absolute inset-0 flex flex-col items-center text-center"
+          style={{ padding: "50cqw 18cqw 8cqw" }}
+        >
+          <h3
+            className="section-heading font-bold tracking-[0.05em] text-sienna-600"
+            style={{ fontSize: "5cqw" }}
+          >
             {track.name}
           </h3>
 
-          <p className="mt-1 text-xs font-medium text-gold-500 sm:text-sm">
+          <p
+            className="font-medium text-gold-500"
+            style={{ fontSize: "2.7cqw" }}
+          >
             {track.tagline}
           </p>
 
-          <p className="mt-2 line-clamp-4 text-xs leading-relaxed text-forest-950/70 sm:text-sm lg:text-base">
+          <p
+            className="line-clamp-4 px-2 leading-relaxed text-forest-950/70"
+            style={{ fontSize: "3cqw", marginTop: "1cqw" }}
+          >
             {track.description}
           </p>
         </div>

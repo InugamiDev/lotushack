@@ -102,7 +102,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
             animate="center"
             exit="exit"
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-8 px-8 py-10 sm:flex-row sm:px-12 sm:py-12 motion-reduce:transition-none"
+            className="flex flex-col items-center gap-6 px-5 py-8 sm:flex-row sm:gap-8 sm:px-12 sm:py-12 motion-reduce:transition-none"
             role="group"
             aria-roledescription="slide"
             aria-label={`${index + 1} of ${count}: ${current.name}`}
@@ -122,7 +122,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
                   width={current.width}
                   height={current.height}
                   unoptimized={isSvg}
-                  className="h-auto max-h-24 w-auto max-w-[280px] object-contain transition-all duration-200"
+                  className="h-auto max-h-20 w-auto max-w-[220px] object-contain transition-all duration-200 sm:max-h-24 sm:max-w-[280px]"
                 />
               </a>
             </div>

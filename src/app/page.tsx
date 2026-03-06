@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { TracksSection } from "@/components/sections/TracksSection";
 import { SponsorsSection } from "@/components/sections/SponsorsSection";
+import { MentorsSection } from "@/components/sections/MentorsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { SplashScreen } from "@/components/ui/SplashScreen";
 import { BackToTop } from "@/components/ui/BackToTop";
@@ -62,7 +63,12 @@ export default function Home() {
 
           <SponsorsSection />
 
-          {/* Sponsors (transparent) → FAQ (transparent) */}
+          {/* Sponsors (transparent) → Mentors (transparent) */}
+          <LotusDivider prevBg="transparent" nextBg="transparent" />
+
+          <MentorsSection />
+
+          {/* Mentors (transparent) → FAQ (transparent) */}
           <LotusDivider prevBg="transparent" nextBg="transparent" />
 
           <FAQSection />

@@ -4,7 +4,7 @@ import { tracks } from "@/data/tracks";
 
 export function TracksSection() {
   return (
-    <section id="tracks" className="py-24 sm:py-36">
+    <section id="tracks" className="overflow-hidden py-24 sm:py-36">
       <div className="mx-auto max-w-7xl px-6">
         <SectionReveal>
           <div className="text-center">
@@ -27,7 +27,9 @@ export function TracksSection() {
               variant={i % 2 === 0 ? "slide-left" : "slide-right"}
               delay={i * 0.1}
             >
-              <TrackCard track={track} index={i} />
+              <div className="mx-auto w-full max-w-[85vw] sm:max-w-sm md:max-w-none">
+                <TrackCard track={track} index={i} />
+              </div>
             </SectionReveal>
           ))}
         </div>

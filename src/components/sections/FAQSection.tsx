@@ -14,7 +14,7 @@ const categories: { key: FAQCategory; label: string }[] = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="relative py-24 sm:py-36 overflow-hidden">
+    <section id="faq" className="relative overflow-hidden py-24 sm:py-36">
       {/* Floating glowing lotus decorations */}
       <LotusDecoration
         size="lg"
@@ -40,7 +40,7 @@ export function FAQSection() {
         style={{ animationDelay: "4s" }}
       />
 
-      <div className="relative mx-auto max-w-3xl px-6">
+      <div className="relative mx-auto max-w-6xl px-6">
         <SectionReveal>
           <div className="text-center">
             <h2
@@ -64,14 +64,18 @@ export function FAQSection() {
           </div>
         </SectionReveal>
 
-        <div className="mt-12 space-y-10">
-          {categories.map((cat) => {
+        {/* 2×2 category grid */}
+        <div className="mt-12 grid gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 md:grid-cols-2 md:gap-x-10 md:gap-y-10">
+          {categories.map((cat, catIdx) => {
             const items = faqItems.filter((item) => item.category === cat.key);
             if (items.length === 0) return null;
 
             return (
               <div key={cat.key}>
-                <SectionReveal>
+                <SectionReveal
+                  variant={catIdx % 2 === 0 ? "slide-left" : "slide-right"}
+                  delay={catIdx * 0.08}
+                >
                   <h3 className="mb-2 font-[family-name:var(--font-heading)] text-xs font-semibold uppercase tracking-[0.2em] text-gold-400">
                     {cat.label}
                   </h3>
@@ -79,7 +83,7 @@ export function FAQSection() {
 
                 <StaggerReveal
                   variant="slide-up"
-                  staggerDelay={0.08}
+                  staggerDelay={0.06}
                   className="divide-y divide-gold-400/15 border-t border-b border-gold-400/15"
                 >
                   {items.map((item) => (
