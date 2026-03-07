@@ -19,8 +19,13 @@ const CRITICAL_IMAGES = [
   // About section
   "/assets/img/hero/pagoda-tower.png",
   "/assets/img/ui/about-sign-arrow.png",
-  // Track cards
+  // Card frames
   "/assets/img/ui/card-frame.png",
+  "/assets/img/ui/floating-card.png",
+  // Supporters
+  "/assets/img/supporters/sihub.png",
+  "/assets/img/supporters/cerebral-valley.png",
+  "/assets/img/supporters/tttt-ctgd.png",
   // Footer branding
   "/assets/svg/branding/hackharvard-logo.svg",
   // Sponsor logos (lightLogo preferred, fallback to logo)

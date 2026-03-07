@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* Fixed full-page background with celestial atmospheric layers */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-fixed bg-[center_75%]"
+        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-[center_75%]"
         style={{ backgroundImage: "url('/assets/img/hero/bg.avif')" }}
         aria-hidden="true"
       >

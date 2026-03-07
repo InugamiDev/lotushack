@@ -22,7 +22,7 @@ export function useImagePreloader(urls: string[]): { allLoaded: boolean } {
       });
 
     const timeoutPromise = new Promise<void>((resolve) =>
-      setTimeout(resolve, 5000)
+      setTimeout(resolve, 10000)
     );
 
     Promise.race([
