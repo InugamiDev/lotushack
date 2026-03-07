@@ -1,29 +1,84 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { useCountdown } from "@/hooks/useCountdown";
 import {
+  EVENT_START,
   EVENT_END,
   EVENT_LOCATION,
   REGISTER_URL,
   DISCORD_URL,
 } from "@/lib/constants";
 import { pad } from "@/lib/utils";
-import { schedule, categoryColors } from "@/data/schedule";
-import type { EventCategory } from "@/data/schedule";
+import { schedule, categoryStyle } from "@/data/schedule";
+import type { EventCategory, ScheduleEvent } from "@/data/schedule";
 import { TimelineEvent } from "@/components/ui/TimelineEvent";
 import { LotusDecoration } from "@/components/ui/LotusDecoration";
 
-const categoryMeta: Record<EventCategory, { label: string; dot: string }> = {
-  ceremony: { label: "Ceremony", dot: "bg-gold-400" },
-  workshop: { label: "Workshop", dot: "bg-lotus-400" },
-  meal: { label: "Meal", dot: "bg-jade-400" },
-  hacking: { label: "Hacking", dot: "bg-forest-700 ring-1 ring-forest-600" },
-  judging: { label: "Judging", dot: "bg-gold-400" },
+// ── Time-grid layout helpers ──
+
+function timeToMin(t: string) {
+  const [h, m] = t.split(":").map(Number);
+  return h * 60 + m;
+}
+
+type LayoutedEvent = {
+  event: ScheduleEvent;
+  col: number;
+  totalCols: number;
+  topPx: number;
+  heightPx: number;
 };
+
+function layoutEvents(
+  events: ScheduleEvent[],
+  minHour: number,
+  hourPx: number,
+): LayoutedEvent[] {
+  if (events.length === 0) return [];
+
+  const items = events
+    .map((e) => {
+      const startMin = timeToMin(e.startTime);
+      const endMin =
+        e.endTime === e.startTime ? startMin + 30 : timeToMin(e.endTime);
+      return { event: e, startMin, endMin };
+    })
+    .sort((a, b) => a.startMin - b.startMin || a.endMin - b.endMin);
+
+  // Greedy column assignment for overlapping events
+  const placed: {
+    startMin: number;
+    endMin: number;
+    col: number;
+    event: ScheduleEvent;
+  }[] = [];
+
+  for (const item of items) {
+    const occupied = new Set(
+      placed
+        .filter((p) => p.endMin > item.startMin && p.startMin < item.endMin)
+        .map((p) => p.col),
+    );
+    let col = 0;
+    while (occupied.has(col)) col++;
+    placed.push({ ...item, col });
+  }
+
+  return placed.map((item) => {
+    const overlapping = placed.filter(
+      (p) => p.endMin > item.startMin && p.startMin < item.endMin,
+    );
+    const totalCols = Math.max(...overlapping.map((p) => p.col)) + 1;
+    const topPx = ((item.startMin - minHour * 60) / 60) * hourPx;
+    const dur = Math.max(item.endMin - item.startMin, 30);
+    const heightPx = (dur / 60) * hourPx;
+    return { event: item.event, col: item.col, totalCols, topPx, heightPx };
+  });
+}
 
 function CountdownUnit({
   value,
@@ -33,14 +88,14 @@ function CountdownUnit({
   label: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-1.5">
+    <div className="flex flex-col items-center gap-2">
       <span
-        className="min-w-[2.5rem] text-center font-mono text-3xl font-bold tabular-nums text-gold-400 sm:min-w-[3.5rem] sm:text-5xl"
-        style={{ textShadow: "0 0 24px oklch(0.78 0.16 75 / 0.4)" }}
+        className="min-w-[3.5rem] text-center font-mono text-5xl font-bold tabular-nums text-gold-400 sm:min-w-[5rem] sm:text-7xl"
+        style={{ textShadow: "0 0 32px oklch(0.78 0.16 75 / 0.45)" }}
       >
         {value}
       </span>
-      <span className="font-[family-name:var(--font-heading)] text-[0.625rem] font-medium uppercase tracking-[0.2em] text-text-muted sm:text-xs">
+      <span className="font-[family-name:var(--font-heading)] text-xs font-medium uppercase tracking-[0.2em] text-text-muted sm:text-sm">
         {label}
       </span>
     </div>
@@ -49,8 +104,20 @@ function CountdownUnit({
 
 export default function SchedulePage() {
   const [activeDay, setActiveDay] = useState(0);
-  const { days, hours, minutes, seconds, mounted } = useCountdown(EVENT_END);
+  const preEvent = useCountdown(EVENT_START);
+  const hackingEnd = useCountdown(EVENT_END);
+
+  const hasStarted = preEvent.mounted && preEvent.days === 0 && preEvent.hours === 0 && preEvent.minutes === 0 && preEvent.seconds === 0;
+  const isLive = hasStarted && !(hackingEnd.days === 0 && hackingEnd.hours === 0 && hackingEnd.minutes === 0 && hackingEnd.seconds === 0);
+  const mounted = preEvent.mounted;
   const ph = "--";
+
+  // Real-time clock for "now" indicator
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <>
@@ -155,54 +222,60 @@ export default function SchedulePage() {
             {" "}2026
           </h1>
 
-          {/* Live badge + location */}
+          {/* Status badge + location */}
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm text-cream-100/50">
-            <span className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-red-400">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+            {isLive ? (
+              <span className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-red-400">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                </span>
+                Live
               </span>
-              Live
-            </span>
+            ) : (
+              <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-gold-400">
+                March 20–22, 2026
+              </span>
+            )}
             <span aria-hidden="true" className="text-gold-400/30">&middot;</span>
             <span className="font-[family-name:var(--font-heading)] tracking-wide">
               {EVENT_LOCATION}
             </span>
           </div>
 
-          {/* Countdown */}
-          <div
-            className="mt-8"
-            role="timer"
-            aria-live="polite"
-            aria-label="Countdown until hacking ends"
-          >
+          {/* Main countdown — until hack begins */}
+          <div className="mt-8" role="timer" aria-live="polite" aria-label="Countdown until event starts">
             <div className="flex items-start justify-center gap-3 sm:gap-5">
-              <CountdownUnit value={mounted ? pad(days) : ph} label="Days" />
-              <span
-                className="self-start pt-1 font-mono text-2xl font-bold text-gold-400/30 sm:pt-2 sm:text-4xl"
-                aria-hidden="true"
-              >
-                :
-              </span>
-              <CountdownUnit value={mounted ? pad(hours) : ph} label="Hours" />
-              <span
-                className="self-start pt-1 font-mono text-2xl font-bold text-gold-400/30 sm:pt-2 sm:text-4xl"
-                aria-hidden="true"
-              >
-                :
-              </span>
-              <CountdownUnit value={mounted ? pad(minutes) : ph} label="Min" />
-              <span
-                className="self-start pt-1 font-mono text-2xl font-bold text-gold-400/30 sm:pt-2 sm:text-4xl"
-                aria-hidden="true"
-              >
-                :
-              </span>
-              <CountdownUnit value={mounted ? pad(seconds) : ph} label="Sec" />
+              <CountdownUnit value={preEvent.mounted ? pad(preEvent.days) : ph} label="Days" />
+              <span className="self-start pt-2 font-mono text-4xl font-bold text-gold-400/30 sm:pt-3 sm:text-6xl" aria-hidden="true">:</span>
+              <CountdownUnit value={preEvent.mounted ? pad(preEvent.hours) : ph} label="Hours" />
+              <span className="self-start pt-2 font-mono text-4xl font-bold text-gold-400/30 sm:pt-3 sm:text-6xl" aria-hidden="true">:</span>
+              <CountdownUnit value={preEvent.mounted ? pad(preEvent.minutes) : ph} label="Min" />
+              <span className="self-start pt-2 font-mono text-4xl font-bold text-gold-400/30 sm:pt-3 sm:text-6xl" aria-hidden="true">:</span>
+              <CountdownUnit value={preEvent.mounted ? pad(preEvent.seconds) : ph} label="Sec" />
             </div>
             <p className="mt-3 font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.2em] text-cream-100/30">
-              until hacking ends
+              until the hack begins
+            </p>
+          </div>
+
+          {/* 36h hacking timer — dormant until hack day */}
+          <div className="mt-8">
+            <p className="font-[family-name:var(--font-heading)] text-[0.6875rem] uppercase tracking-[0.25em] text-jade-400/50 sm:text-xs">
+              36-Hour Hacking Timer
+            </p>
+            <p
+              className="mt-2 font-mono text-4xl font-bold tabular-nums text-jade-400/25 sm:text-5xl"
+              style={{
+                textShadow: "0 0 30px oklch(0.55 0.17 165 / 0.15), 0 0 60px oklch(0.55 0.17 165 / 0.08)",
+              }}
+            >
+              {isLive
+                ? `${pad(hackingEnd.hours + hackingEnd.days * 24)}:${pad(hackingEnd.minutes)}:${pad(hackingEnd.seconds)}`
+                : "36:00:00"}
+            </p>
+            <p className="mt-1.5 text-xs text-cream-100/25 sm:text-sm">
+              {isLive ? "hacking in progress" : "activates when hacking begins"}
             </p>
           </div>
         </motion.div>
@@ -284,34 +357,71 @@ export default function SchedulePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.35 }}
-          className="relative z-10 mx-auto max-w-3xl px-4 pt-5 pb-2 sm:px-6"
+          className="relative z-10 mx-auto max-w-4xl px-4 pt-5 pb-2 sm:px-6"
         >
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {(Object.keys(categoryColors) as EventCategory[]).map((cat) => (
+            {(Object.keys(categoryStyle) as EventCategory[]).filter((cat) => cat !== "hacking").map((cat) => (
               <span
                 key={cat}
-                className="inline-flex items-center gap-2 rounded-full border border-cream-50/10 bg-cream-50/[0.03] px-3 py-1.5 text-xs text-cream-100/50"
+                className={`inline-flex items-center gap-2 rounded-md border-l-[3px] px-3 py-1.5 text-xs ${categoryStyle[cat].bg} ${categoryStyle[cat].border}`}
               >
-                <span
-                  className={`inline-block h-2 w-2 rounded-full ${categoryMeta[cat].dot}`}
-                />
-                <span className="font-[family-name:var(--font-heading)] text-[0.6875rem] tracking-wide">
-                  {categoryMeta[cat].label}
+                <span className={`font-[family-name:var(--font-heading)] text-[0.6875rem] font-semibold tracking-wide ${categoryStyle[cat].text}`}>
+                  {categoryStyle[cat].label}
                 </span>
               </span>
             ))}
           </div>
         </motion.div>
 
+        {/* Hacking period note */}
+        <div className="relative z-10 mx-auto max-w-4xl px-4 pt-4 text-center sm:px-6">
+          <p className="text-sm text-cream-100/40">
+            <span className="font-[family-name:var(--font-heading)] tracking-wide text-jade-400/70">Hacking Period</span>
+            <span className="mx-2 text-gold-400/20" aria-hidden="true">&middot;</span>
+            Friday 20:00 — Sunday 08:00 (36 hours)
+          </p>
+        </div>
+
         {/* Subtle divider */}
-        <div className="mx-auto max-w-3xl px-6 py-2" aria-hidden="true">
+        <div className="mx-auto max-w-4xl px-6 py-2" aria-hidden="true">
           <div className="h-px bg-gradient-to-r from-transparent via-gold-400/15 to-transparent" />
         </div>
 
-        {/* ── Timeline events ── */}
+        {/* ── Time grid ── */}
         <AnimatePresence mode="wait">
-          {schedule.map((day, i) =>
-            activeDay === i ? (
+          {schedule.map((day, i) => {
+            if (activeDay !== i) return null;
+
+            const filteredEvents = day.events.filter(
+              (e) => e.category !== "hacking",
+            );
+            const HOUR_PX = 100;
+
+            // Compute hour range from filtered events
+            const allMins = filteredEvents.flatMap((e) => {
+              const s = timeToMin(e.startTime);
+              const end =
+                e.endTime === e.startTime ? s + 30 : timeToMin(e.endTime);
+              return [s, end];
+            });
+            const minHour = Math.floor(Math.min(...allMins) / 60);
+            const maxHour = Math.ceil(Math.max(...allMins) / 60);
+            const totalHours = maxHour - minHour;
+
+            const layouted = layoutEvents(filteredEvents, minHour, HOUR_PX);
+
+            // Now indicator
+            const nowMin = now.getHours() * 60 + now.getMinutes();
+            const dayDate = new Date(`${day.date} 2026`);
+            const isToday =
+              mounted && now.toDateString() === dayDate.toDateString();
+            const nowTopPx = ((nowMin - minHour * 60) / 60) * HOUR_PX;
+            const showNow =
+              isToday &&
+              nowMin >= minHour * 60 &&
+              nowMin <= maxHour * 60;
+
+            return (
               <motion.div
                 key={day.label}
                 id={`tabpanel-day-${i}`}
@@ -321,30 +431,89 @@ export default function SchedulePage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 mx-auto max-w-3xl px-4 py-4 sm:px-6"
+                className="relative z-10 mx-auto max-w-4xl px-4 py-4 sm:px-6"
               >
-                {/* Vertical timeline line */}
-                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-gradient-to-b from-gold-400/20 via-gold-400/10 to-transparent sm:left-[1.85rem]" aria-hidden="true" />
-
-                <div className="flex flex-col gap-3">
-                  {day.events.map((event, eventIdx) => (
-                    <motion.div
-                      key={`${event.startTime}-${event.title}`}
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.3,
-                        ease: "easeOut",
-                        delay: eventIdx * 0.05,
+                <div className="rounded-2xl border border-gold-400/10 bg-forest-950/60 backdrop-blur-md">
+                  {/* Scrollable grid — hidden scrollbar */}
+                  <div
+                    className="overflow-y-auto px-4 py-6 sm:px-6 sm:py-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    style={{ maxHeight: "65vh" }}
+                  >
+                    <div
+                      className="relative"
+                      style={{
+                        height: `${totalHours * HOUR_PX}px`,
                       }}
                     >
-                      <TimelineEvent event={event} />
-                    </motion.div>
-                  ))}
+                      {/* Hour grid lines */}
+                      {Array.from({ length: totalHours + 1 }, (_, idx) => {
+                        const hour = minHour + idx;
+                        return (
+                          <div
+                            key={hour}
+                            className="absolute left-0 right-0"
+                            style={{
+                              top: `${idx * HOUR_PX}px`,
+                            }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="w-14 shrink-0 text-right font-mono text-[0.6875rem] tabular-nums text-cream-100/30 sm:text-xs">
+                                {`${String(hour).padStart(2, "0")}:00`}
+                              </span>
+                              <div className="h-px flex-1 bg-cream-100/[0.06]" />
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      {/* Events container */}
+                      <div
+                        className="absolute top-0 bottom-0 right-0"
+                        style={{ left: "4.75rem" }}
+                      >
+                        {layouted.map((le, idx) => (
+                          <motion.div
+                            key={`${le.event.startTime}-${le.event.title}`}
+                            initial={{ opacity: 0, x: -6 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
+                              duration: 0.25,
+                              ease: "easeOut",
+                              delay: idx * 0.04,
+                            }}
+                            className="absolute"
+                            style={{
+                              top: `${le.topPx + 2}px`,
+                              height: `${Math.max(le.heightPx - 4, 56)}px`,
+                              left: `calc(${(le.col / le.totalCols) * 100}% + 2px)`,
+                              width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
+                            }}
+                          >
+                            <TimelineEvent event={le.event} />
+                          </motion.div>
+                        ))}
+
+                        {/* Now indicator line */}
+                        {showNow && (
+                          <div
+                            className="pointer-events-none absolute left-0 right-0 z-20"
+                            style={{
+                              top: `${nowTopPx}px`,
+                            }}
+                          >
+                            <div className="flex items-center">
+                              <div className="-ml-1.5 h-3 w-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                              <div className="h-[2px] flex-1 bg-red-500/70" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            ) : null,
-          )}
+            );
+          })}
         </AnimatePresence>
 
         {/* ── Gold lotus divider ── */}

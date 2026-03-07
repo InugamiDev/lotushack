@@ -1,5 +1,5 @@
 import type { ScheduleEvent } from "@/data/schedule";
-import { categoryColors } from "@/data/schedule";
+import { categoryStyle } from "@/data/schedule";
 import { cn } from "@/lib/utils";
 
 type TimelineEventProps = {
@@ -7,35 +7,34 @@ type TimelineEventProps = {
 };
 
 export function TimelineEvent({ event }: TimelineEventProps) {
+  const cat = categoryStyle[event.category];
+
   return (
     <div
       className={cn(
-        "group relative rounded-xl border-l-4 px-5 py-4 transition-all duration-200 hover:translate-x-1 motion-reduce:transition-none sm:px-6 sm:py-5",
-        categoryColors[event.category],
+        "group relative h-full overflow-hidden rounded-md border-l-[3px] p-2.5 transition-all duration-200 motion-reduce:transition-none sm:p-3",
+        "hover:z-10 hover:shadow-lg hover:shadow-black/25",
+        cat.bg,
+        cat.border,
       )}
     >
-      {/* Hover glow */}
-      <div
-        className="pointer-events-none absolute inset-0 rounded-xl bg-cream-50/0 transition-all duration-300 group-hover:bg-cream-50/[0.02] motion-reduce:transition-none"
-        aria-hidden="true"
-      />
-
-      <div className="relative flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
-        <span className="shrink-0 font-mono text-sm tabular-nums text-gold-400/70 sm:min-w-[7rem]">
-          {event.startTime}
-          {event.endTime !== event.startTime ? ` – ${event.endTime}` : null}
-        </span>
-        <div className="flex-1">
-          <h4 className="font-[family-name:var(--font-heading)] text-base font-semibold tracking-wide text-text-primary">
-            {event.title}
-          </h4>
-          {event.description ? (
-            <p className="mt-1 text-sm leading-relaxed text-text-muted">
-              {event.description}
-            </p>
-          ) : null}
-        </div>
-      </div>
+      <p className="font-mono text-[0.625rem] tabular-nums text-cream-50/50 sm:text-xs">
+        {event.startTime}
+        {event.endTime !== event.startTime ? ` – ${event.endTime}` : null}
+      </p>
+      <h4
+        className={cn(
+          "mt-0.5 truncate font-[family-name:var(--font-heading)] text-sm font-semibold leading-tight tracking-wide group-hover:whitespace-normal sm:text-base",
+          cat.text,
+        )}
+      >
+        {event.title}
+      </h4>
+      {event.description ? (
+        <p className="mt-0.5 line-clamp-1 text-[0.6875rem] leading-snug text-cream-100/35 group-hover:line-clamp-none sm:text-xs">
+          {event.description}
+        </p>
+      ) : null}
     </div>
   );
 }

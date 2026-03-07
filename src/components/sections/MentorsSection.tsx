@@ -90,12 +90,6 @@ export function MentorsSection() {
         variant="gold"
         className="pointer-events-none absolute left-[6%] top-[15%] opacity-[0.08] animate-lotus-drift-glow motion-reduce:animate-none"
       />
-      <LotusDecoration
-        size="md"
-        variant="gold"
-        className="pointer-events-none absolute right-[5%] bottom-[20%] opacity-[0.06] animate-lotus-float-glow motion-reduce:animate-none"
-        style={{ animationDelay: "2.5s" }}
-      />
 
       <div className="relative mx-auto max-w-5xl px-6">
         <SectionReveal>

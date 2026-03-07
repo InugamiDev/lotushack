@@ -19,12 +19,45 @@ export type ScheduleDay = {
   events: ScheduleEvent[];
 };
 
-export const categoryColors: Record<EventCategory, string> = {
-  ceremony: "border-l-gold-400 bg-gold-400/5",
-  workshop: "border-l-lotus-400 bg-lotus-400/5",
-  meal: "border-l-jade-400 bg-jade-400/5",
-  hacking: "border-l-forest-700 bg-forest-800/30",
-  judging: "border-l-gold-400 bg-gold-400/5",
+export const categoryStyle: Record<
+  EventCategory,
+  { label: string; bg: string; border: string; text: string; pill: string }
+> = {
+  ceremony: {
+    label: "Ceremony",
+    bg: "bg-gold-400/25 hover:bg-gold-400/35",
+    border: "border-l-gold-400",
+    text: "text-gold-300",
+    pill: "border-gold-400/30 bg-gold-400/10 text-gold-400",
+  },
+  workshop: {
+    label: "Workshop",
+    bg: "bg-lotus-400/25 hover:bg-lotus-400/35",
+    border: "border-l-lotus-400",
+    text: "text-lotus-300",
+    pill: "border-lotus-400/30 bg-lotus-400/10 text-lotus-400",
+  },
+  meal: {
+    label: "Meal",
+    bg: "bg-jade-400/25 hover:bg-jade-400/35",
+    border: "border-l-jade-400",
+    text: "text-jade-400",
+    pill: "border-jade-400/30 bg-jade-400/10 text-jade-400",
+  },
+  hacking: {
+    label: "Hacking",
+    bg: "bg-forest-700/40 hover:bg-forest-700/50",
+    border: "border-l-jade-600",
+    text: "text-cream-100/80",
+    pill: "border-forest-700/40 bg-forest-800/20 text-cream-100/60",
+  },
+  judging: {
+    label: "Judging",
+    bg: "bg-amber-600/25 hover:bg-amber-600/35",
+    border: "border-l-amber-600",
+    text: "text-gold-300",
+    pill: "border-gold-400/30 bg-gold-400/10 text-gold-400",
+  },
 };
 
 export const schedule: ScheduleDay[] = [
