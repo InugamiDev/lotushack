@@ -14,7 +14,7 @@ const supporters = [
     url: "https://sihub.gov.vn/en",
     width: 500,
     height: 500,
-    sizeClass: "w-24 sm:w-32 md:w-40",
+    sizeClass: "w-20 sm:w-32 md:w-40",
     bgClass: "rounded-full bg-white/90 p-1.5 sm:p-2",
   },
   {
@@ -23,7 +23,7 @@ const supporters = [
     url: "https://cerebralvalley.ai",
     width: 500,
     height: 500,
-    sizeClass: "w-40 sm:w-56 md:w-64",
+    sizeClass: "w-32 sm:w-56 md:w-64",
   },
   {
     name: "Trung Tam Thong Tin va Chuong Trinh Giao Duc TP.HCM",
@@ -31,7 +31,7 @@ const supporters = [
     url: "https://ttthongtin.hcm.edu.vn",
     width: 500,
     height: 500,
-    sizeClass: "w-24 sm:w-32 md:w-40",
+    sizeClass: "w-20 sm:w-32 md:w-40",
   },
 ];
 
@@ -45,7 +45,7 @@ export function SponsorsSection() {
             <h3 className="section-heading text-2xl font-bold tracking-[0.15em] text-cream-50 sm:text-3xl md:text-4xl">
               Supported by
             </h3>
-            <div className="mt-10 flex items-center justify-center gap-10 sm:gap-14 md:gap-20">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-14 md:gap-20">
               {supporters.map((s) => (
                 <a
                   key={s.name}

@@ -138,12 +138,12 @@ export function HeroSection() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center gap-6 px-4 text-center sm:gap-8 sm:px-6"
+        className="relative z-10 flex w-full flex-col items-center gap-4 px-4 text-center sm:gap-8 sm:px-6"
         style={reducedMotion ? undefined : { y: contentY }}
       >
         {/* Title */}
         <h1
-          className="section-heading text-5xl font-bold tracking-[0.05em] text-cream-50 sm:text-6xl md:text-7xl lg:text-8xl"
+          className="section-heading text-4xl font-bold tracking-[0.05em] text-cream-50 sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ textWrap: "balance" }}
         >
           LOTUS
@@ -156,13 +156,13 @@ export function HeroSection() {
         </p>
 
         {/* Date */}
-        <p className="font-[family-name:var(--font-heading)] text-lg tracking-[0.1em] text-gold-400 sm:text-xl">
+        <p className="font-[family-name:var(--font-heading)] text-base tracking-[0.1em] text-gold-400 sm:text-xl">
           Mar 20&ndash;22, 2026
         </p>
 
         {/* Tagline */}
         <p
-          className="max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl"
+          className="max-w-2xl text-base leading-relaxed text-text-secondary sm:text-xl"
           style={{ textWrap: "balance" }}
         >
           Join 800+{" "}

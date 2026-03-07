@@ -202,9 +202,9 @@ function SimpleAbout() {
         </SectionReveal>
 
         <SectionReveal variant="slide-up" delay={0.15}>
-          <div className="mt-12 flex flex-wrap justify-center gap-6">
+          <div className="mt-12 flex flex-wrap justify-center gap-3 sm:gap-6">
             {stats.map((stat, i) => (
-              <div key={stat.title} className="w-40 sm:w-48 lg:w-52">
+              <div key={stat.title} className="w-[80vw] sm:w-48 lg:w-52">
                 <SectionReveal variant="slide-up" delay={0.1 + i * 0.08}>
                   <StatCard stat={stat} index={i} />
                 </SectionReveal>
