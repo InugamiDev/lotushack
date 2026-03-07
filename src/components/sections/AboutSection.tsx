@@ -24,15 +24,15 @@ function useSimpleLayout() {
 function AboutSignPanel() {
   return (
     <>
-      {/* Desktop: about sign image */}
-      <div className="relative mx-auto -translate-y-10 hidden w-full max-w-xl lg:block lg:max-w-none lg:scale-150 lg:origin-center">
+      {/* Desktop: about sign image — scales with viewport, overflows container */}
+      <div className="relative hidden overflow-visible lg:flex lg:items-start lg:justify-start lg:-ml-28 lg:-mt-16 xl:-ml-36 xl:-mt-20" style={{ height: "140vh" }}>
         <Image
           src="/assets/img/ui/about-sign-arrow.png"
           alt="Welcome to LotusHacks x HackHarvard Vietnam, the largest 36-hour hackathon in Vietnam."
           width={2048}
           height={3072}
-          className="relative h-auto w-full"
-          sizes="50vw"
+          className="relative h-full w-auto max-w-none object-contain"
+          sizes="(min-width: 1024px) 60vw, 50vw"
           priority
         />
       </div>
