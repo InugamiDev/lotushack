@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { CountdownTimer } from "@/components/ui/CountdownTimer";
 import { RotatingWords } from "@/components/ui/RotatingWords";
 import { REGISTER_URL, DISCORD_URL } from "@/lib/constants";
 
@@ -172,9 +171,6 @@ export function HeroSection() {
           />{" "}
           in shaping a defining moment for SE Asia&apos;s builder community.
         </p>
-
-        {/* Countdown */}
-        <CountdownTimer />
 
         {/* CTA Buttons */}
         <div className="flex flex-col gap-4 sm:flex-row">
