@@ -104,6 +104,7 @@ function CountdownUnit({
 
 export default function SchedulePage() {
   const [activeDay, setActiveDay] = useState(0);
+  const [activeCategory, setActiveCategory] = useState<EventCategory | null>(null);
   const preEvent = useCountdown(EVENT_START);
   const hackingEnd = useCountdown(EVENT_END);
 
@@ -360,16 +361,29 @@ export default function SchedulePage() {
           className="relative z-10 mx-auto max-w-4xl px-4 pt-5 pb-2 sm:px-6"
         >
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {(Object.keys(categoryStyle) as EventCategory[]).filter((cat) => cat !== "hacking").map((cat) => (
-              <span
-                key={cat}
-                className={`inline-flex items-center gap-2 rounded-md border-l-[3px] px-3 py-1.5 text-xs ${categoryStyle[cat].bg} ${categoryStyle[cat].border}`}
-              >
-                <span className={`font-[family-name:var(--font-heading)] text-[0.6875rem] font-semibold tracking-wide ${categoryStyle[cat].text}`}>
-                  {categoryStyle[cat].label}
-                </span>
-              </span>
-            ))}
+            {(Object.keys(categoryStyle) as EventCategory[]).filter((cat) => cat !== "hacking").map((cat) => {
+              const isActive = activeCategory === cat;
+              const isInactive = activeCategory !== null && !isActive;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(isActive ? null : cat)}
+                  className={`inline-flex cursor-pointer items-center gap-2 rounded-md border-l-[3px] px-3 py-1.5 text-xs transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 ${categoryStyle[cat].border} ${
+                    isActive
+                      ? `${categoryStyle[cat].bg} ring-1 ring-gold-400/30 shadow-md shadow-black/20`
+                      : isInactive
+                        ? "bg-forest-950/30 opacity-40"
+                        : categoryStyle[cat].bg
+                  }`}
+                >
+                  <span className={`font-[family-name:var(--font-heading)] text-[0.6875rem] font-semibold tracking-wide ${
+                    isInactive ? "text-cream-100/40" : categoryStyle[cat].text
+                  }`}>
+                    {categoryStyle[cat].label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -489,7 +503,7 @@ export default function SchedulePage() {
                               width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
                             }}
                           >
-                            <TimelineEvent event={le.event} />
+                            <TimelineEvent event={le.event} dimmed={activeCategory !== null && le.event.category !== activeCategory} />
                           </motion.div>
                         ))}
 

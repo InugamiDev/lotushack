@@ -4,18 +4,20 @@ import { cn } from "@/lib/utils";
 
 type TimelineEventProps = {
   event: ScheduleEvent;
+  dimmed?: boolean;
 };
 
-export function TimelineEvent({ event }: TimelineEventProps) {
+export function TimelineEvent({ event, dimmed = false }: TimelineEventProps) {
   const cat = categoryStyle[event.category];
 
   return (
     <div
       className={cn(
-        "group relative h-full overflow-hidden rounded-md border-l-[3px] p-2.5 transition-all duration-200 motion-reduce:transition-none sm:p-3",
+        "group relative h-full overflow-hidden rounded-md border-l-[3px] p-2.5 transition-all duration-300 motion-reduce:transition-none sm:p-3",
         "hover:z-10 hover:shadow-lg hover:shadow-black/25",
         cat.bg,
         cat.border,
+        dimmed && "opacity-25 blur-[1px] saturate-50",
       )}
     >
       <p className="font-mono text-[0.625rem] tabular-nums text-cream-50/50 sm:text-xs">
