@@ -21,7 +21,7 @@ export type ScheduleDay = {
 
 export const categoryStyle: Record<
   EventCategory,
-  { label: string; bg: string; border: string; text: string; pill: string }
+  { label: string; bg: string; border: string; text: string; pill: string; glow: string }
 > = {
   ceremony: {
     label: "Ceremony",
@@ -29,6 +29,7 @@ export const categoryStyle: Record<
     border: "border-l-gold-400",
     text: "text-gold-300",
     pill: "border-gold-400/30 bg-gold-400/10 text-gold-400",
+    glow: "0 0 12px oklch(0.78 0.16 75 / 0.4), 0 0 24px oklch(0.78 0.16 75 / 0.15)",
   },
   workshop: {
     label: "Workshop",
@@ -36,6 +37,7 @@ export const categoryStyle: Record<
     border: "border-l-lotus-400",
     text: "text-lotus-300",
     pill: "border-lotus-400/30 bg-lotus-400/10 text-lotus-400",
+    glow: "0 0 12px oklch(0.65 0.25 330 / 0.4), 0 0 24px oklch(0.65 0.25 330 / 0.15)",
   },
   meal: {
     label: "Meal",
@@ -43,6 +45,7 @@ export const categoryStyle: Record<
     border: "border-l-jade-400",
     text: "text-jade-400",
     pill: "border-jade-400/30 bg-jade-400/10 text-jade-400",
+    glow: "0 0 12px oklch(0.55 0.17 165 / 0.4), 0 0 24px oklch(0.55 0.17 165 / 0.15)",
   },
   hacking: {
     label: "Hacking",
@@ -50,6 +53,7 @@ export const categoryStyle: Record<
     border: "border-l-jade-600",
     text: "text-cream-100/80",
     pill: "border-forest-700/40 bg-forest-800/20 text-cream-100/60",
+    glow: "0 0 12px oklch(0.45 0.12 165 / 0.3), 0 0 24px oklch(0.45 0.12 165 / 0.1)",
   },
   judging: {
     label: "Judging",
@@ -57,6 +61,7 @@ export const categoryStyle: Record<
     border: "border-l-amber-600",
     text: "text-gold-300",
     pill: "border-gold-400/30 bg-gold-400/10 text-gold-400",
+    glow: "0 0 12px oklch(0.7 0.15 70 / 0.4), 0 0 24px oklch(0.7 0.15 70 / 0.15)",
   },
 };
 

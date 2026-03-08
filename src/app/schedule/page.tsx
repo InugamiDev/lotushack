@@ -308,7 +308,9 @@ export default function SchedulePage() {
             role="tablist"
             aria-label="Schedule days"
           >
-            {schedule.map((day, i) => (
+            {schedule.map((day, i) => {
+              const dayHasCategory = activeCategory !== null && day.events.some((e) => e.category === activeCategory);
+              return (
               <button
                 key={day.label}
                 role="tab"
@@ -316,11 +318,12 @@ export default function SchedulePage() {
                 aria-selected={activeDay === i}
                 aria-controls={`tabpanel-day-${i}`}
                 onClick={() => setActiveDay(i)}
-                className={`group relative shrink-0 rounded-xl px-5 py-3.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 sm:px-6 sm:py-4 ${
+                className={`group relative shrink-0 rounded-xl px-5 py-3.5 text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 sm:px-6 sm:py-4 ${
                   activeDay === i
                     ? "bg-gold-400/10 shadow-sm shadow-gold-400/10"
                     : "hover:bg-cream-50/[0.03]"
                 }`}
+                style={dayHasCategory && activeCategory ? { boxShadow: categoryStyle[activeCategory].glow } : undefined}
               >
                 {/* Active indicator line */}
                 {activeDay === i && (
@@ -349,7 +352,8 @@ export default function SchedulePage() {
                   {day.date}
                 </span>
               </button>
-            ))}
+              );
+            })}
           </div>
         </motion.div>
 
@@ -368,13 +372,14 @@ export default function SchedulePage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(isActive ? null : cat)}
-                  className={`inline-flex cursor-pointer items-center gap-2 rounded-md border-l-[3px] px-3 py-1.5 text-xs transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 ${categoryStyle[cat].border} ${
+                  className={`inline-flex cursor-pointer items-center gap-2 rounded-md border-l-[3px] px-3 py-1.5 text-xs transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 ${categoryStyle[cat].border} ${
                     isActive
-                      ? `${categoryStyle[cat].bg} ring-1 ring-gold-400/30 shadow-md shadow-black/20`
+                      ? categoryStyle[cat].bg
                       : isInactive
                         ? "bg-forest-950/30 opacity-40"
                         : categoryStyle[cat].bg
                   }`}
+                  style={isActive ? { boxShadow: categoryStyle[cat].glow } : undefined}
                 >
                   <span className={`font-[family-name:var(--font-heading)] text-[0.6875rem] font-semibold tracking-wide ${
                     isInactive ? "text-cream-100/40" : categoryStyle[cat].text
