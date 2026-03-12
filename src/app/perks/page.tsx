@@ -46,13 +46,7 @@ const accentMap = {
   },
 } as const;
 
-function PerkCard({
-  perk,
-  index,
-}: {
-  perk: VerifiedPerk;
-  index: number;
-}) {
+function PerkCard({ perk, index }: { perk: VerifiedPerk; index: number }) {
   const [copied, setCopied] = useState(false);
   const a = accentMap[perk.accent];
 
@@ -88,9 +82,7 @@ function PerkCard({
           />
         </div>
         <div className="min-w-0 flex-1">
-          <h3
-            className="font-[family-name:var(--font-heading)] text-base font-semibold tracking-wide text-cream-50 sm:text-lg"
-          >
+          <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold tracking-wide text-cream-50 sm:text-lg">
             {perk.sponsor}
           </h3>
           <span
@@ -198,7 +190,8 @@ export default function PerksPage() {
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         throw new Error(
-          data?.error || "We couldn't find your registration. Double-check your email and phone number.",
+          data?.error ||
+            "We couldn't find your registration. Double-check your email and phone number.",
         );
       }
 
@@ -453,17 +446,17 @@ export default function PerksPage() {
                 </div>
 
                 {/* Sponsor logos */}
-                <div className="mt-10">
-                  <p className="mb-5 text-center font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.25em] text-cream-100/25">
+                <div className="mt-8">
+                  <p className="mb-2 text-center font-[family-name:var(--font-heading)] text-xs uppercase tracking-[0.25em] text-gold-400/40">
                     Powered By
                   </p>
-                  <div className="grid grid-cols-3 place-items-center gap-x-4 gap-y-4 sm:gap-x-6">
+                  <div className="grid grid-cols-3 place-items-center gap-x-4 gap-y-0 sm:gap-x-6">
                     {perks.map((perk) => (
                       <div
                         key={perk.sponsor}
                         className={`relative w-full opacity-30 transition-opacity duration-300 hover:opacity-60 ${
                           perk.sponsor === "Agora"
-                            ? "h-24 sm:h-32 md:h-40"
+                            ? "h-14 sm:h-20 md:h-24"
                             : "h-8 sm:h-12 md:h-14"
                         }`}
                       >
@@ -493,8 +486,7 @@ export default function PerksPage() {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="mb-8 flex items-center gap-3 rounded-xl border border-jade-400/20 bg-jade-400/10 px-5 py-4"
                   style={{
-                    boxShadow:
-                      "0 0 24px oklch(0.55 0.17 165 / 0.15)",
+                    boxShadow: "0 0 24px oklch(0.55 0.17 165 / 0.15)",
                   }}
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-jade-400/20">
