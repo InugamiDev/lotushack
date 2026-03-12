@@ -12,6 +12,7 @@ export const NAV_LINKS = [
   { label: "Sponsors", href: "#sponsors" },
   { label: "FAQ", href: "#faq" },
   { label: "Schedule", href: "/schedule" },
+  { label: "Perks", href: "/perks" },
 ] as const;
 
 export const SOCIALS = [
