@@ -60,7 +60,7 @@ function layoutEvents(
   for (const item of items) {
     const occupied = new Set(
       placed
-        .filter((p) => p.endMin > item.startMin && p.startMin < item.endMin)
+        .filter((p) => p.endMin >= item.startMin && p.startMin <= item.endMin)
         .map((p) => p.col),
     );
     let col = 0;
@@ -105,6 +105,7 @@ function CountdownUnit({
 export default function SchedulePage() {
   const [activeDay, setActiveDay] = useState(0);
   const [activeCategory, setActiveCategory] = useState<EventCategory | null>(null);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const preEvent = useCountdown(EVENT_START);
   const hackingEnd = useCountdown(EVENT_END);
 
@@ -488,27 +489,41 @@ export default function SchedulePage() {
                         className="absolute top-0 bottom-0 right-0"
                         style={{ left: "4.75rem" }}
                       >
-                        {layouted.map((le, idx) => (
-                          <motion.div
-                            key={`${le.event.startTime}-${le.event.title}`}
-                            initial={{ opacity: 0, x: -6 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{
-                              duration: 0.25,
-                              ease: "easeOut",
-                              delay: idx * 0.04,
-                            }}
-                            className="absolute"
-                            style={{
-                              top: `${le.topPx + 2}px`,
-                              height: `${Math.max(le.heightPx - 4, 56)}px`,
-                              left: `calc(${(le.col / le.totalCols) * 100}% + 2px)`,
-                              width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
-                            }}
-                          >
-                            <TimelineEvent event={le.event} dimmed={activeCategory !== null && le.event.category !== activeCategory} />
-                          </motion.div>
-                        ))}
+                        {(() => {
+                          const EXPAND_PX = 90;
+                          const hovered = hoveredIdx !== null ? layouted[hoveredIdx] : null;
+                          const hoveredEndPx = hovered ? hovered.topPx + hovered.heightPx : 0;
+                          return layouted.map((le, idx) => {
+                            const isHovered = hoveredIdx === idx;
+                            const baseTop = le.topPx + 2;
+                            // Only push events that start AFTER the hovered event ends (no time overlap)
+                            const pushDown = hovered && !isHovered && le.topPx >= hoveredEndPx ? EXPAND_PX : 0;
+                            return (
+                              <motion.div
+                                key={`${le.event.startTime}-${le.event.title}`}
+                                initial={{ opacity: 0, x: -6 }}
+                                animate={{ opacity: 1, x: 0, y: pushDown }}
+                                transition={{
+                                  duration: 0.25,
+                                  ease: "easeOut",
+                                  delay: idx * 0.04,
+                                  y: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                                }}
+                                className="absolute"
+                                style={{
+                                  top: `${baseTop}px`,
+                                  left: `calc(${(le.col / le.totalCols) * 100}% + 2px)`,
+                                  width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
+                                  zIndex: isHovered ? 50 : 1,
+                                }}
+                                onMouseEnter={() => setHoveredIdx(idx)}
+                                onMouseLeave={() => setHoveredIdx(null)}
+                              >
+                                <TimelineEvent event={le.event} dimmed={activeCategory !== null && le.event.category !== activeCategory} height={Math.max(le.heightPx - 4, 56)} expanded={isHovered} />
+                              </motion.div>
+                            );
+                          });
+                        })()}
 
                         {/* Now indicator line */}
                         {showNow && (
