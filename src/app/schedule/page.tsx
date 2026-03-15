@@ -365,7 +365,7 @@ export default function SchedulePage() {
           className="relative z-10 mx-auto max-w-4xl px-4 pt-5 pb-2 sm:px-6"
         >
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {(Object.keys(categoryStyle) as EventCategory[]).filter((cat) => cat !== "hacking").map((cat) => {
+            {(Object.keys(categoryStyle) as EventCategory[]).map((cat) => {
               const isActive = activeCategory === cat;
               const isInactive = activeCategory !== null && !isActive;
               return (
@@ -411,9 +411,7 @@ export default function SchedulePage() {
           {schedule.map((day, i) => {
             if (activeDay !== i) return null;
 
-            const filteredEvents = day.events.filter(
-              (e) => e.category !== "hacking",
-            );
+            const filteredEvents = day.events;
             const HOUR_PX = 100;
 
             // Compute hour range from filtered events
