@@ -151,7 +151,7 @@ export function HeroSection() {
 
         {/* Subtitle */}
         <p className="font-[family-name:var(--font-heading)] text-sm font-medium uppercase tracking-[0.2em] text-cream-100/60 sm:text-base">
-          Presented by LotusHacks &times; HackHarvard
+          Presented by LotusHacks &times; HackHarvard &times; GenAI Fund
         </p>
 
         {/* Date */}
