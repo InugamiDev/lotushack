@@ -311,7 +311,7 @@ export const schedule: ScheduleDay[] = [
       {
         title: "Booth Fair",
         startTime: "09:00",
-        endTime: "10:00",
+        endTime: "10:30",
         category: "activity",
         description: "Explore sponsor booths, collect swag, and network with industry reps",
       },

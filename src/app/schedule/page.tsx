@@ -463,83 +463,90 @@ export default function SchedulePage() {
                         height: `${totalHours * HOUR_PX}px`,
                       }}
                     >
-                      {/* Hour grid lines */}
-                      {Array.from({ length: totalHours + 1 }, (_, idx) => {
-                        const hour = minHour + idx;
+                      {/* Hour grid lines + Events share push-down logic */}
+                      {(() => {
+                        const EXPAND_PX = 90;
+                        const hovered = hoveredIdx !== null ? layouted[hoveredIdx] : null;
+                        const hoveredEndPx = hovered ? hovered.topPx + hovered.heightPx : 0;
+
                         return (
-                          <div
-                            key={hour}
-                            className="absolute left-0 right-0"
-                            style={{
-                              top: `${idx * HOUR_PX}px`,
-                            }}
-                          >
-                            <div className="flex items-center gap-3">
-                              <span className="w-14 shrink-0 text-right font-mono text-[0.6875rem] tabular-nums text-cream-100/30 sm:text-xs">
-                                {`${String(hour).padStart(2, "0")}:00`}
-                              </span>
-                              <div className="h-px flex-1 bg-cream-100/[0.06]" />
+                          <>
+                            {/* Hour grid lines */}
+                            {Array.from({ length: totalHours + 1 }, (_, idx) => {
+                              const hour = minHour + idx;
+                              const linePx = idx * HOUR_PX;
+                              const pushDown = hovered && linePx >= hoveredEndPx ? EXPAND_PX : 0;
+                              return (
+                                <motion.div
+                                  key={hour}
+                                  className="absolute left-0 right-0"
+                                  style={{ top: `${linePx}px` }}
+                                  animate={{ y: pushDown }}
+                                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <span className="w-14 shrink-0 text-right font-mono text-[0.6875rem] tabular-nums text-cream-100/30 sm:text-xs">
+                                      {`${String(hour).padStart(2, "0")}:00`}
+                                    </span>
+                                    <div className="h-px flex-1 bg-cream-100/[0.06]" />
+                                  </div>
+                                </motion.div>
+                              );
+                            })}
+
+                            {/* Events container */}
+                            <div
+                              className="absolute top-0 bottom-0 right-0"
+                              style={{ left: "4.75rem" }}
+                            >
+                              {layouted.map((le, idx) => {
+                                const isHovered = hoveredIdx === idx;
+                                const baseTop = le.topPx + 2;
+                                const pushDown = hovered && !isHovered && le.topPx >= hoveredEndPx ? EXPAND_PX : 0;
+                                return (
+                                  <motion.div
+                                    key={`${le.event.startTime}-${le.event.title}`}
+                                    initial={{ opacity: 0, x: -6 }}
+                                    animate={{ opacity: 1, x: 0, y: pushDown }}
+                                    transition={{
+                                      duration: 0.25,
+                                      ease: "easeOut",
+                                      delay: idx * 0.04,
+                                      y: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
+                                    }}
+                                    className="absolute"
+                                    style={{
+                                      top: `${baseTop}px`,
+                                      left: `calc(${(le.col / le.totalCols) * 100}% + 2px)`,
+                                      width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
+                                      zIndex: isHovered ? 50 : 1,
+                                    }}
+                                    onMouseEnter={() => setHoveredIdx(idx)}
+                                    onMouseLeave={() => setHoveredIdx(null)}
+                                  >
+                                    <TimelineEvent event={le.event} dimmed={activeCategory !== null && le.event.category !== activeCategory} height={Math.max(le.heightPx - 4, 56)} expanded={isHovered} />
+                                  </motion.div>
+                                );
+                              })}
+
+                              {/* Now indicator line */}
+                              {showNow && (
+                                <motion.div
+                                  className="pointer-events-none absolute left-0 right-0 z-20"
+                                  style={{ top: `${nowTopPx}px` }}
+                                  animate={{ y: hovered && nowTopPx >= hoveredEndPx ? EXPAND_PX : 0 }}
+                                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                                >
+                                  <div className="flex items-center">
+                                    <div className="-ml-1.5 h-3 w-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
+                                    <div className="h-[2px] flex-1 bg-red-500/70" />
+                                  </div>
+                                </motion.div>
+                              )}
                             </div>
-                          </div>
+                          </>
                         );
-                      })}
-
-                      {/* Events container */}
-                      <div
-                        className="absolute top-0 bottom-0 right-0"
-                        style={{ left: "4.75rem" }}
-                      >
-                        {(() => {
-                          const EXPAND_PX = 90;
-                          const hovered = hoveredIdx !== null ? layouted[hoveredIdx] : null;
-                          const hoveredEndPx = hovered ? hovered.topPx + hovered.heightPx : 0;
-                          return layouted.map((le, idx) => {
-                            const isHovered = hoveredIdx === idx;
-                            const baseTop = le.topPx + 2;
-                            // Only push events that start AFTER the hovered event ends (no time overlap)
-                            const pushDown = hovered && !isHovered && le.topPx >= hoveredEndPx ? EXPAND_PX : 0;
-                            return (
-                              <motion.div
-                                key={`${le.event.startTime}-${le.event.title}`}
-                                initial={{ opacity: 0, x: -6 }}
-                                animate={{ opacity: 1, x: 0, y: pushDown }}
-                                transition={{
-                                  duration: 0.25,
-                                  ease: "easeOut",
-                                  delay: idx * 0.04,
-                                  y: { duration: 0.3, ease: [0.4, 0, 0.2, 1] },
-                                }}
-                                className="absolute"
-                                style={{
-                                  top: `${baseTop}px`,
-                                  left: `calc(${(le.col / le.totalCols) * 100}% + 2px)`,
-                                  width: `calc(${(1 / le.totalCols) * 100}% - 4px)`,
-                                  zIndex: isHovered ? 50 : 1,
-                                }}
-                                onMouseEnter={() => setHoveredIdx(idx)}
-                                onMouseLeave={() => setHoveredIdx(null)}
-                              >
-                                <TimelineEvent event={le.event} dimmed={activeCategory !== null && le.event.category !== activeCategory} height={Math.max(le.heightPx - 4, 56)} expanded={isHovered} />
-                              </motion.div>
-                            );
-                          });
-                        })()}
-
-                        {/* Now indicator line */}
-                        {showNow && (
-                          <div
-                            className="pointer-events-none absolute left-0 right-0 z-20"
-                            style={{
-                              top: `${nowTopPx}px`,
-                            }}
-                          >
-                            <div className="flex items-center">
-                              <div className="-ml-1.5 h-3 w-3 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
-                              <div className="h-[2px] flex-1 bg-red-500/70" />
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                      })()}
                     </div>
                   </div>
                 </div>

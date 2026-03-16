@@ -11,8 +11,7 @@ export const NAV_LINKS = [
   { label: "Tracks", href: "#tracks" },
   { label: "Sponsors", href: "#sponsors" },
   { label: "FAQ", href: "#faq" },
-  { label: "Schedule", href: "/schedule" },
-  { label: "Perks", href: "/perks" },
+  { label: "Schedule", href: "https://live.lotushack.org" },
 ] as const;
 
 export const SOCIALS = [
