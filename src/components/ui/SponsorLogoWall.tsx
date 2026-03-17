@@ -86,6 +86,12 @@ const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
   eTest: "max-h-12 sm:max-h-18 md:max-h-22",
   fal: "max-h-8 sm:max-h-12 md:max-h-16",
   Notion: "max-h-8 sm:max-h-12 md:max-h-16",
+  TASCO: "max-h-14 sm:max-h-22 md:max-h-28",
+};
+
+/** Per-sponsor positional nudges (translate offsets) */
+const SPONSOR_NUDGES: Record<string, string> = {
+  OpenAI: "translate-x-4 sm:translate-x-6 md:translate-x-8",
 };
 
 /** Detect square-ish logos to apply rounded corners */
@@ -105,6 +111,7 @@ function SponsorCard({
   const logoSrc = sponsor.logo;
   const isSvg = logoSrc.endsWith(".svg");
   const sizeClass = SPONSOR_SIZE_OVERRIDES[sponsor.name] ?? heightClass;
+  const nudge = SPONSOR_NUDGES[sponsor.name];
 
   return (
     <a
@@ -112,7 +119,10 @@ function SponsorCard({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Visit ${sponsor.name}`}
-      className="group flex items-center justify-center p-1 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 sm:p-2"
+      className={cn(
+        "group flex items-center justify-center p-1 transition-all duration-300 hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 sm:p-2",
+        nudge,
+      )}
     >
       <Image
         src={logoSrc}
