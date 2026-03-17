@@ -44,7 +44,14 @@ const ROWS: RowConfig[] = [
   },
   // Row 4 — Bronze (6 sponsors)
   {
-    names: ["CIS", "MLC Sports", "PhongVu.vn", "Galaxy Holdings", "Coca-Cola", "Exa"],
+    names: [
+      "CIS",
+      "MLC Sports",
+      "PhongVu.vn",
+      "Galaxy Holdings",
+      "Coca-Cola",
+      "Exa",
+    ],
     heightClass: "max-h-7 sm:max-h-10 md:max-h-14",
     cols: 6,
     widthClass: "w-[92%]",
@@ -86,7 +93,7 @@ const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
   eTest: "max-h-12 sm:max-h-18 md:max-h-22",
   fal: "max-h-8 sm:max-h-12 md:max-h-16",
   Notion: "max-h-8 sm:max-h-12 md:max-h-16",
-  TASCO: "max-h-14 sm:max-h-22 md:max-h-28",
+  TASCO: "right-5 max-h-24 sm:max-h-28 md:max-h-36",
 };
 
 /** Per-sponsor positional nudges (translate offsets) */
