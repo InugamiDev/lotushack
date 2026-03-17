@@ -20,6 +20,7 @@ type RowConfig = {
   names: string[];
   heightClass: string;
   cols: number;
+  widthClass?: string;
 };
 
 const ROWS: RowConfig[] = [
@@ -46,6 +47,7 @@ const ROWS: RowConfig[] = [
     names: ["CIS", "MLC Sports", "PhongVu.vn", "Galaxy Holdings", "Coca-Cola", "Exa"],
     heightClass: "max-h-7 sm:max-h-10 md:max-h-14",
     cols: 6,
+    widthClass: "w-[92%]",
   },
   // Row 5 — Bronze (5 sponsors)
   {
@@ -80,6 +82,7 @@ const ROWS: RowConfig[] = [
 const SPONSOR_SIZE_OVERRIDES: Record<string, string> = {
   Agora: "max-h-12 sm:max-h-16 md:max-h-20",
   Algorithmics: "max-h-10 sm:max-h-14 md:max-h-18",
+  AWS: "max-h-10 sm:max-h-14 md:max-h-18",
   eTest: "max-h-12 sm:max-h-18 md:max-h-22",
   fal: "max-h-8 sm:max-h-12 md:max-h-16",
   Notion: "max-h-8 sm:max-h-12 md:max-h-16",
@@ -141,7 +144,11 @@ export function SponsorLogoWall({ sponsors }: SponsorLogoWallProps) {
           return (
             <div
               key={rowIdx}
-              className="flex w-full items-center justify-center"
+              className={cn(
+                "items-center",
+                row.widthClass ?? "w-full",
+                row.widthClass ? "self-start" : "justify-center",
+              )}
               style={{
                 display: "grid",
                 gridTemplateColumns: `repeat(${row.cols}, minmax(0, 1fr))`,
