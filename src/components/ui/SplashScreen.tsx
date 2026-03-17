@@ -28,8 +28,8 @@ const CRITICAL_IMAGES = [
   "/assets/img/supporters/tttt-ctgd.png",
   // Footer branding
   "/assets/svg/branding/hackharvard-logo.svg",
-  // Sponsor logos (lightLogo preferred, fallback to logo)
-  ...sponsors.map((s) => s.lightLogo ?? s.logo),
+  // Sponsor logos
+  ...sponsors.map((s) => s.logo),
 ];
 
 export function SplashScreen() {

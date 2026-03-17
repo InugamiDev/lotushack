@@ -71,7 +71,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
     [prev, next],
   );
 
-  const logoSrc = current.lightLogo ?? current.logo;
+  const logoSrc = current.logo;
   const isSvg = logoSrc.endsWith(".svg");
 
   const slideVariants = {
@@ -122,7 +122,7 @@ export function SponsorCarousel({ sponsors }: SponsorCarouselProps) {
                   width={current.width}
                   height={current.height}
                   unoptimized={isSvg}
-                  className="h-auto max-h-20 w-auto max-w-[220px] object-contain transition-all duration-200 sm:max-h-24 sm:max-w-[280px]"
+                  className="h-auto max-h-20 w-auto max-w-[220px] object-contain mix-blend-screen transition-all duration-200 sm:max-h-24 sm:max-w-[280px]"
                 />
               </a>
             </div>
