@@ -58,7 +58,7 @@ const ROWS: RowConfig[] = [
   },
   // Row 5 — Bronze (5 sponsors)
   {
-    names: ["ElevenLabs", "GenAI Fund", "Algorithmics", "Replit", "Manus"],
+    names: ["ElevenLabs", "Interfaze", "Algorithmics", "Replit", "Manus"],
     heightClass: "max-h-7 sm:max-h-10 md:max-h-14",
     cols: 5,
   },

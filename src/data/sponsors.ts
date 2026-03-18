@@ -185,9 +185,9 @@ export const sponsors: Sponsor[] = [
     tier: "bronze",
   },
   {
-    name: "GenAI Fund",
-    logo: "/assets/svg/sponsors/genai-fund-white.svg",
-    url: "https://genaifund.ai",
+    name: "Interfaze",
+    logo: "/assets/svg/sponsors/interfaze-white.svg",
+    url: "https://interfaze.ai",
     width: 513,
     height: 266,
     tier: "bronze",
