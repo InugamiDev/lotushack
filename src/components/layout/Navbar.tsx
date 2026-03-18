@@ -78,22 +78,41 @@ export function Navbar() {
           scrolled ? "py-2" : "py-4",
         )}
       >
-        {/* Logo */}
+        {/* Logos */}
         <a
           href="#"
-          className="flex items-center gap-3 touch-action-manipulation"
+          className="flex items-center gap-2.5 touch-action-manipulation sm:gap-3"
           aria-label="LotusHack — back to top"
         >
           <Image
             src="/assets/img/hero/logo.png"
-            alt=""
+            alt="LotusHacks"
             width={36}
             height={36}
             className={cn(
               "h-auto w-auto transition-transform duration-300",
               scrolled ? "scale-90" : "scale-100",
             )}
-            aria-hidden="true"
+          />
+          <Image
+            src="/assets/svg/branding/hackharvard-logo.svg"
+            alt="HackHarvard"
+            width={100}
+            height={40}
+            className={cn(
+              "h-7 w-auto opacity-70 transition-transform duration-300 sm:h-8",
+              scrolled ? "scale-90" : "scale-100",
+            )}
+          />
+          <Image
+            src="/assets/svg/branding/genai-logo.svg"
+            alt="GenAI Fund"
+            width={45}
+            height={45}
+            className={cn(
+              "h-7 w-auto opacity-70 transition-transform duration-300 sm:h-8",
+              scrolled ? "scale-90" : "scale-100",
+            )}
           />
         </a>
 
